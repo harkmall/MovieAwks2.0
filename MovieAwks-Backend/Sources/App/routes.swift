@@ -6,9 +6,9 @@ func routes(_ app: Application) throws {
         "It works!"
     }
 
-    app.get("hello") { req async -> String in
-        "Hello, world!"
-    }
+    let unprotectedAPI = app.grouped("api")
+    try unprotectedAPI.grouped("auth", "siwa").register(collection: SIWAController())
 
-    try app.register(collection: TodoController())
+    let tokenProtectedAPI = unprotectedAPI.grouped(Token.authenticator())
+    try tokenProtectedAPI.grouped("users").register(collection: UserController())
 }

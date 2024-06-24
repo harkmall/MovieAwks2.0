@@ -7,6 +7,8 @@ import Vapor
 public func configure(_ app: Application) async throws {
     // uncomment to serve files from /Public folder
     // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
+    
+    app.middleware.use(SessionsMiddleware(session: app.sessions.driver))
 
     app.databases.use(DatabaseConfigurationFactory.postgres(configuration: .init(
         hostname: Environment.get("DATABASE_HOST") ?? "localhost",
@@ -16,8 +18,10 @@ public func configure(_ app: Application) async throws {
         database: Environment.get("DATABASE_NAME") ?? "vapor_database",
         tls: .prefer(try .init(configuration: .clientDefault)))
     ), as: .psql)
-
-    app.migrations.add(CreateTodo())
+    
+    app.migrations.add(UserMigration())
+    app.migrations.add(TokenMigration())
+    
     try await app.autoMigrate()
     // register routes
     try routes(app)
