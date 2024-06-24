@@ -21,7 +21,5 @@ extension UserController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         routes.get("me", use: getMeHandler)
     }
-    
-    
 }
 

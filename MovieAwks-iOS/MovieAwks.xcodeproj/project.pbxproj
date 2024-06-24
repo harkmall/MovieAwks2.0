@@ -14,6 +14,12 @@
 		A73FA8082C220727008262C3 /* MovieAwksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FA8072C220727008262C3 /* MovieAwksTests.swift */; };
 		A73FA8122C220727008262C3 /* MovieAwksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FA8112C220727008262C3 /* MovieAwksUITests.swift */; };
 		A73FA8142C220727008262C3 /* MovieAwksUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FA8132C220727008262C3 /* MovieAwksUITestsLaunchTests.swift */; };
+		A7737B552C29C917004944FC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A7737B542C29C917004944FC /* Alamofire */; };
+		A7737B582C29C9E7004944FC /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B572C29C9E7004944FC /* Networking.swift */; };
+		A7737B5B2C29CA92004944FC /* SIWAAuthReqeustBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B5A2C29CA92004944FC /* SIWAAuthReqeustBody.swift */; };
+		A7737B5D2C29CAA2004944FC /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B5C2C29CAA2004944FC /* UserResponse.swift */; };
+		A7737B5F2C29CAA9004944FC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B5E2C29CAA9004944FC /* User.swift */; };
+		A7737B612C29CADA004944FC /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B602C29CADA004944FC /* APIError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +51,11 @@
 		A73FA80D2C220727008262C3 /* MovieAwksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieAwksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A73FA8112C220727008262C3 /* MovieAwksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAwksUITests.swift; sourceTree = "<group>"; };
 		A73FA8132C220727008262C3 /* MovieAwksUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAwksUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A7737B572C29C9E7004944FC /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		A7737B5A2C29CA92004944FC /* SIWAAuthReqeustBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIWAAuthReqeustBody.swift; sourceTree = "<group>"; };
+		A7737B5C2C29CAA2004944FC /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
+		A7737B5E2C29CAA9004944FC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A7737B602C29CADA004944FC /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7737B552C29C917004944FC /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +107,7 @@
 		A73FA7F42C220726008262C3 /* MovieAwks */ = {
 			isa = PBXGroup;
 			children = (
+				A7737B562C29C944004944FC /* Networking */,
 				A73FA7F52C220726008262C3 /* MovieAwksApp.swift */,
 				A73FA7F72C220726008262C3 /* LoginView.swift */,
 				A73FA7F92C220727008262C3 /* Assets.xcassets */,
@@ -129,6 +142,26 @@
 			path = MovieAwksUITests;
 			sourceTree = "<group>";
 		};
+		A7737B562C29C944004944FC /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				A7737B592C29CA57004944FC /* Models */,
+				A7737B572C29C9E7004944FC /* Networking.swift */,
+				A7737B602C29CADA004944FC /* APIError.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		A7737B592C29CA57004944FC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A7737B5A2C29CA92004944FC /* SIWAAuthReqeustBody.swift */,
+				A7737B5C2C29CAA2004944FC /* UserResponse.swift */,
+				A7737B5E2C29CAA9004944FC /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -145,6 +178,9 @@
 			dependencies = (
 			);
 			name = MovieAwks;
+			packageProductDependencies = (
+				A7737B542C29C917004944FC /* Alamofire */,
+			);
 			productName = MovieAwks;
 			productReference = A73FA7F22C220726008262C3 /* MovieAwks.app */;
 			productType = "com.apple.product-type.application";
@@ -217,6 +253,9 @@
 				Base,
 			);
 			mainGroup = A73FA7E92C220726008262C3;
+			packageReferences = (
+				A7737B532C29C917004944FC /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = A73FA7F32C220726008262C3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -259,8 +298,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7737B5D2C29CAA2004944FC /* UserResponse.swift in Sources */,
+				A7737B582C29C9E7004944FC /* Networking.swift in Sources */,
+				A7737B5F2C29CAA9004944FC /* User.swift in Sources */,
+				A7737B5B2C29CA92004944FC /* SIWAAuthReqeustBody.swift in Sources */,
 				A73FA7F82C220726008262C3 /* LoginView.swift in Sources */,
 				A73FA7F62C220726008262C3 /* MovieAwksApp.swift in Sources */,
+				A7737B612C29CADA004944FC /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +667,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A7737B532C29C917004944FC /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire?tab=readme-ov-file#swift-package-manager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A7737B542C29C917004944FC /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A7737B532C29C917004944FC /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A73FA7EA2C220726008262C3 /* Project object */;
 }

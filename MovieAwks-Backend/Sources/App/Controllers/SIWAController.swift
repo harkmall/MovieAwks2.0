@@ -21,17 +21,17 @@ struct SIWAController {
     func authHandler(req: Request) async throws -> UserResponse {
         let userBody = try req.content.decode(SIWARequestBody.self)
         
-        let appleIdentityToken = try await req.jwt.apple.verify(userBody.appleIdentityToken, applicationIdentifier: ProjectConfig.SIWA.applicationIdentifier)
-        let user = try await User.findByAppleIdentifier(appleIdentityToken.subject.value, req: req)
+        let appleIdentityToken = try await req.jwt.apple.verify(userBody.appleIdentityToken, 
+                                                                applicationIdentifier: ProjectConfig.SIWA.applicationIdentifier)
+        let user = try await User.findByAppleIdentifier(appleIdentityToken.subject.value, 
+                                                        req: req)
         if user == nil {
             return try await SIWAController.signUp(appleIdentityToken: appleIdentityToken,
                                                    firstName: userBody.firstName,
                                                    lastName: userBody.lastName,
                                                    req: req)
         } else {
-            return try await SIWAController.signIn(appleIdentityToken: appleIdentityToken,
-                                                   firstName: userBody.firstName,
-                                                   lastName: userBody.lastName,
+            return try await SIWAController.signIn(user: user,
                                                    req: req)
         }
     }
@@ -61,21 +61,8 @@ struct SIWAController {
         return try .init(accessToken: accessToken, user: user)
     }
     
-    static func signIn(appleIdentityToken: AppleIdentityToken,
-                       firstName: String? = nil,
-                       lastName: String? = nil,
+    static func signIn(user: User,
                        req: Request) async throws -> UserResponse {
-        
-        let user = try await User.findByAppleIdentifier(appleIdentityToken.subject.value, req: req)
-        guard let user = user else {
-            throw Abort(.notFound)
-        }
-        if let email = appleIdentityToken.email {
-            user.email = email
-            user.firstName = firstName
-            user.lastName = lastName
-            try await user.update(on: req.db)
-        }
         guard let accessToken = try? user.createAccessToken(req: req) else {
             throw Abort(.internalServerError)
         }

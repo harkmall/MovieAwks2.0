@@ -92,9 +92,7 @@ extension User {
             .filter(\.$email == email)
             .first()
     }
-}
 
-extension User {
     static func findByAppleIdentifier(_ identifier: String, req: Request) async throws -> User? {
         try await User.query(on: req.db)
             .filter(\.$appleUserIdentifier == identifier)
