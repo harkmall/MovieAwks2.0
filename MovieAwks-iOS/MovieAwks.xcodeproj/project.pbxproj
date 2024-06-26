@@ -16,10 +16,17 @@
 		A73FA8142C220727008262C3 /* MovieAwksUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FA8132C220727008262C3 /* MovieAwksUITestsLaunchTests.swift */; };
 		A7737B552C29C917004944FC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A7737B542C29C917004944FC /* Alamofire */; };
 		A7737B582C29C9E7004944FC /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B572C29C9E7004944FC /* Networking.swift */; };
-		A7737B5B2C29CA92004944FC /* SIWAAuthReqeustBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B5A2C29CA92004944FC /* SIWAAuthReqeustBody.swift */; };
+		A7737B5B2C29CA92004944FC /* SIWAAuthRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B5A2C29CA92004944FC /* SIWAAuthRequestBody.swift */; };
 		A7737B5D2C29CAA2004944FC /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B5C2C29CAA2004944FC /* UserResponse.swift */; };
 		A7737B5F2C29CAA9004944FC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B5E2C29CAA9004944FC /* User.swift */; };
 		A7737B612C29CADA004944FC /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B602C29CADA004944FC /* APIError.swift */; };
+		A7737B642C2A0015004944FC /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A7737B632C2A0015004944FC /* KeychainSwift */; };
+		A7737B682C2A09EA004944FC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B672C2A09EA004944FC /* HomeView.swift */; };
+		A7737B6A2C2B0258004944FC /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B692C2B0258004944FC /* UserRepository.swift */; };
+		A7737B6C2C2B07A2004944FC /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B6B2C2B07A2004944FC /* UserService.swift */; };
+		A7737B6E2C2B0B9F004944FC /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B6D2C2B0B9F004944FC /* AuthService.swift */; };
+		A7737B712C2B0CEE004944FC /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B702C2B0CEE004944FC /* Service.swift */; };
+		A7737B742C2B3730004944FC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B732C2B3730004944FC /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,10 +59,16 @@
 		A73FA8112C220727008262C3 /* MovieAwksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAwksUITests.swift; sourceTree = "<group>"; };
 		A73FA8132C220727008262C3 /* MovieAwksUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAwksUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A7737B572C29C9E7004944FC /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
-		A7737B5A2C29CA92004944FC /* SIWAAuthReqeustBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIWAAuthReqeustBody.swift; sourceTree = "<group>"; };
+		A7737B5A2C29CA92004944FC /* SIWAAuthRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIWAAuthRequestBody.swift; sourceTree = "<group>"; };
 		A7737B5C2C29CAA2004944FC /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		A7737B5E2C29CAA9004944FC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A7737B602C29CADA004944FC /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		A7737B672C2A09EA004944FC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A7737B692C2B0258004944FC /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		A7737B6B2C2B07A2004944FC /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		A7737B6D2C2B0B9F004944FC /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		A7737B702C2B0CEE004944FC /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		A7737B732C2B3730004944FC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7737B642C2A0015004944FC /* KeychainSwift in Frameworks */,
 				A7737B552C29C917004944FC /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,9 +121,11 @@
 		A73FA7F42C220726008262C3 /* MovieAwks */ = {
 			isa = PBXGroup;
 			children = (
-				A7737B562C29C944004944FC /* Networking */,
 				A73FA7F52C220726008262C3 /* MovieAwksApp.swift */,
-				A73FA7F72C220726008262C3 /* LoginView.swift */,
+				A7737B692C2B0258004944FC /* UserRepository.swift */,
+				A7737B562C29C944004944FC /* Networking */,
+				A7737B752C2B3EB9004944FC /* Home */,
+				A7737B722C2B3727004944FC /* Login */,
 				A73FA7F92C220727008262C3 /* Assets.xcassets */,
 				A73FA7FB2C220727008262C3 /* MovieAwks.entitlements */,
 				A73FA7FC2C220727008262C3 /* Preview Content */,
@@ -145,9 +161,10 @@
 		A7737B562C29C944004944FC /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				A7737B592C29CA57004944FC /* Models */,
+				A7737B6F2C2B0CCF004944FC /* Services */,
 				A7737B572C29C9E7004944FC /* Networking.swift */,
 				A7737B602C29CADA004944FC /* APIError.swift */,
+				A7737B592C29CA57004944FC /* Models */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -155,11 +172,38 @@
 		A7737B592C29CA57004944FC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A7737B5A2C29CA92004944FC /* SIWAAuthReqeustBody.swift */,
+				A7737B5A2C29CA92004944FC /* SIWAAuthRequestBody.swift */,
 				A7737B5C2C29CAA2004944FC /* UserResponse.swift */,
 				A7737B5E2C29CAA9004944FC /* User.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		A7737B6F2C2B0CCF004944FC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A7737B702C2B0CEE004944FC /* Service.swift */,
+				A7737B6B2C2B07A2004944FC /* UserService.swift */,
+				A7737B6D2C2B0B9F004944FC /* AuthService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A7737B722C2B3727004944FC /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				A73FA7F72C220726008262C3 /* LoginView.swift */,
+				A7737B732C2B3730004944FC /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		A7737B752C2B3EB9004944FC /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				A7737B672C2A09EA004944FC /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +224,7 @@
 			name = MovieAwks;
 			packageProductDependencies = (
 				A7737B542C29C917004944FC /* Alamofire */,
+				A7737B632C2A0015004944FC /* KeychainSwift */,
 			);
 			productName = MovieAwks;
 			productReference = A73FA7F22C220726008262C3 /* MovieAwks.app */;
@@ -255,6 +300,7 @@
 			mainGroup = A73FA7E92C220726008262C3;
 			packageReferences = (
 				A7737B532C29C917004944FC /* XCRemoteSwiftPackageReference "Alamofire" */,
+				A7737B622C2A0015004944FC /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = A73FA7F32C220726008262C3 /* Products */;
 			projectDirPath = "";
@@ -298,13 +344,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7737B682C2A09EA004944FC /* HomeView.swift in Sources */,
+				A7737B712C2B0CEE004944FC /* Service.swift in Sources */,
 				A7737B5D2C29CAA2004944FC /* UserResponse.swift in Sources */,
 				A7737B582C29C9E7004944FC /* Networking.swift in Sources */,
+				A7737B6E2C2B0B9F004944FC /* AuthService.swift in Sources */,
 				A7737B5F2C29CAA9004944FC /* User.swift in Sources */,
-				A7737B5B2C29CA92004944FC /* SIWAAuthReqeustBody.swift in Sources */,
+				A7737B5B2C29CA92004944FC /* SIWAAuthRequestBody.swift in Sources */,
 				A73FA7F82C220726008262C3 /* LoginView.swift in Sources */,
+				A7737B742C2B3730004944FC /* LoginViewModel.swift in Sources */,
+				A7737B6C2C2B07A2004944FC /* UserService.swift in Sources */,
 				A73FA7F62C220726008262C3 /* MovieAwksApp.swift in Sources */,
 				A7737B612C29CADA004944FC /* APIError.swift in Sources */,
+				A7737B6A2C2B0258004944FC /* UserRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -677,6 +729,14 @@
 				minimumVersion = 5.9.1;
 			};
 		};
+		A7737B622C2A0015004944FC /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 24.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -684,6 +744,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A7737B532C29C917004944FC /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		A7737B632C2A0015004944FC /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A7737B622C2A0015004944FC /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

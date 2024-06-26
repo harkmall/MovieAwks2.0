@@ -13,6 +13,7 @@ struct UserController {
     @Sendable
     func getMeHandler(req: Request) throws -> UserResponse {
         let user = try req.auth.require(User.self)
+        //fix this, should just return the user not the UserResponse object
         return try .init(user: user)
     }
 }

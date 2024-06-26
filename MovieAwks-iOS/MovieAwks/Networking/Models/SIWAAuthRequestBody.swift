@@ -8,7 +8,7 @@
 import Foundation
 
 struct SIWAAuthRequestBody: Encodable {
-  let firstName: String?
-  let lastName: String?
-  let appleIdentityToken: String
+    let firstName: String?
+    let lastName: String?
+    let appleIdentityToken: String
 }
