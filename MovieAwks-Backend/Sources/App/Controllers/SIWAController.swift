@@ -61,9 +61,10 @@ struct SIWAController {
         return try .init(accessToken: accessToken, user: user)
     }
     
-    static func signIn(user: User,
+    static func signIn(user: User?,
                        req: Request) async throws -> UserResponse {
-        guard let accessToken = try? user.createAccessToken(req: req) else {
+        guard let user = user ,
+              let accessToken = try? user.createAccessToken(req: req) else {
             throw Abort(.internalServerError)
         }
         try await accessToken.save(on: req.db)

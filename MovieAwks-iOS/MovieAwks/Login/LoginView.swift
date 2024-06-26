@@ -19,19 +19,34 @@ struct LoginView: View {
     var body: some View {
         VStack {
             Spacer()
-            
-            if let error = viewModel.error {
-                Text(error.localizedDescription)
-                    .foregroundStyle(.red)
+            VStack(spacing: 8) {
+                Text("MovieAwks")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                Text("How awkward is it going to be to watch this movie with my parents")
+                    .font(.subheadline)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
             }
-            
-            SignInWithAppleButton(.signIn) {
-                $0.requestedScopes = [.fullName, .email]
-            } onCompletion: { result in
-                Task { await viewModel.handle(appleAuthResult: result) }
+            Spacer()
+
+            if viewModel.isLoading {
+                ProgressView()
+            } else {
+                if let error = viewModel.error {
+                    Text(error.localizedDescription)
+                        .foregroundStyle(.red)
+                }
+                
+                SignInWithAppleButton(.signIn) {
+                    $0.requestedScopes = [.fullName, .email]
+                } onCompletion: { result in
+                    Task { await viewModel.handle(appleAuthResult: result) }
+                }
+                .signInWithAppleButtonStyle(.whiteOutline)
+                .frame(height: 50)
             }
-            .signInWithAppleButtonStyle(.whiteOutline)
-            .frame(height: 50)
+
         }
         .padding()
     }
