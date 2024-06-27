@@ -76,7 +76,7 @@ struct SIWAController {
 
 // MARK: - RouteCollection
 extension SIWAController: RouteCollection {
-  func boot(routes: RoutesBuilder) throws {
-    routes.post(use: authHandler)
-  }
+    func boot(routes: RoutesBuilder) throws {
+        routes.post(use: authHandler)
+    }
 }

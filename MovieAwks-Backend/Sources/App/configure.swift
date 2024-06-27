@@ -23,6 +23,14 @@ public func configure(_ app: Application) async throws {
     app.migrations.add(TokenMigration())
     
     try await app.autoMigrate()
+    
+    let tmdbDateFormatter = DateFormatter()
+    tmdbDateFormatter.dateFormat = "YYYY-MM-DD"
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .formatted(tmdbDateFormatter)
+    decoder.keyDecodingStrategy = .convertFromSnakeCase
+    ContentConfiguration.global.use(decoder: decoder, for: .json)
+    
     // register routes
     try routes(app)
 }
