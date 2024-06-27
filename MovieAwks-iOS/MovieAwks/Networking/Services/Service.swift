@@ -9,8 +9,5 @@ import Foundation
 import Alamofire
 
 protocol Service {
-    var path: String { get }
-    var method: HTTPMethod { get }
-    var headers: HTTPHeaders? { get }
-    var parameters: Encodable? { get }
+    var environment: Networking.Environment { get set }
 }

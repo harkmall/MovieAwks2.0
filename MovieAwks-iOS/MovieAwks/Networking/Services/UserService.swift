@@ -8,37 +8,24 @@
 import Foundation
 import Alamofire
 
-enum UserService {
-    case me(bearerToken: String)
+protocol UserServiceType: Service {
+    func getUser(accessToken: String) async throws -> User
 }
 
-extension UserService: Service {
-    var path: String {
-        switch self {
-        case .me:
-            return "/api/users/me"
-        }
+struct UserService: UserServiceType {
+    var environment: Networking.Environment
+    
+    init(environment: Networking.Environment = .development) {
+        self.environment = environment
     }
     
-    var parameters: Encodable? {
-        switch self {
-        case .me:
-            return nil
-        }
-    }
-    
-    var method: HTTPMethod {
-        switch self {
-        case .me:
-            return .get
-        }
-    }
-    
-    var headers: HTTPHeaders? {
-        switch self {
-        case .me(let bearerToken):
-            return .init(arrayLiteral: .authorization(bearerToken: bearerToken))
-        }
+    func getUser(accessToken: String) async throws -> User {
+        return try await AF
+            .request(environment.baseURL + "/api/users/me",
+                     headers: [.authorization(bearerToken: accessToken)])
+            .serializingDecodable(UserResponse.self)
+            .value
+            .user
     }
     
 }

@@ -13,6 +13,10 @@ struct Networking {
         case development
         case production
         
+        static var current: Environment {
+            return .development //make this dependent on something like a build flag
+        }
+        
         var baseURL: String {
             switch self {
             case .development:

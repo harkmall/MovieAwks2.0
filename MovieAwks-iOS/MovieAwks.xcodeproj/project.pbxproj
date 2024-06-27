@@ -27,6 +27,7 @@
 		A7737B6E2C2B0B9F004944FC /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B6D2C2B0B9F004944FC /* AuthService.swift */; };
 		A7737B712C2B0CEE004944FC /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B702C2B0CEE004944FC /* Service.swift */; };
 		A7737B742C2B3730004944FC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B732C2B3730004944FC /* LoginViewModel.swift */; };
+		A7737B772C2DDAB9004944FC /* TMDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B762C2DDAB9004944FC /* TMDBService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		A7737B6D2C2B0B9F004944FC /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		A7737B702C2B0CEE004944FC /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		A7737B732C2B3730004944FC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		A7737B762C2DDAB9004944FC /* TMDBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 				A7737B702C2B0CEE004944FC /* Service.swift */,
 				A7737B6B2C2B07A2004944FC /* UserService.swift */,
 				A7737B6D2C2B0B9F004944FC /* AuthService.swift */,
+				A7737B762C2DDAB9004944FC /* TMDBService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				A7737B6C2C2B07A2004944FC /* UserService.swift in Sources */,
 				A73FA7F62C220726008262C3 /* MovieAwksApp.swift in Sources */,
 				A7737B612C29CADA004944FC /* APIError.swift in Sources */,
+				A7737B772C2DDAB9004944FC /* TMDBService.swift in Sources */,
 				A7737B6A2C2B0258004944FC /* UserRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

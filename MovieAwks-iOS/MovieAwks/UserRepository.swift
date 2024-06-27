@@ -14,12 +14,15 @@ class UserRepository: ObservableObject {
     @Published var accessToken: String?
     @Published var user: User?
     
-    private let environment: Networking.Environment
+    private let userService: UserService
+    private let authService: AuthService
     private let keychain = KeychainSwift()
     private let accessTokenKey = "ACCESS_TOKEN"
     
-    init(environment: Networking.Environment) {
-        self.environment = environment
+    init(userService: UserService = UserService(environment: .current),
+         authService: AuthService = AuthService(environment: .current)) {
+        self.userService = userService
+        self.authService = authService
         self.accessToken = keychain.get(accessTokenKey)
     }
     
@@ -29,16 +32,9 @@ class UserRepository: ObservableObject {
 extension UserRepository {
     func getUser() async throws {
         guard let accessToken = accessToken else { throw APIError.unauthorized }
-        
-        let userService = UserService.me(bearerToken: accessToken)
-        
-        let userResponse = try await AF
-            .request(environment.baseURL + userService.path,
-                     headers: userService.headers)
-            .serializingDecodable(UserResponse.self)
-            .value
+        let user = try await userService.getUser(accessToken: accessToken)
         await MainActor.run {
-            self.user = userResponse.user
+            self.user = user
         }
     }
     
@@ -52,33 +48,16 @@ extension UserRepository {
     func authorizeUsingSIWA(identityToken: Data?,
                             firstName: String?,
                             lastName: String?) async throws {
-
-        guard let identityToken = identityToken else { throw APIError.identityTokenMissing }
-        guard let identityTokenString = String(data: identityToken, encoding: .utf8) else { throw APIError.unableToDecodeIdentityToken }
         
-        let service = AuthService.authWithSIWA(firstName: firstName,
-                                               lastName: lastName,
-                                               appleIdentityToken: identityTokenString)
+        let userResponse = try await authService.authWithSIWA(firstName: firstName,
+                                                              lastName: lastName,
+                                                              appleIdentityToken: identityToken)
         
-        let request = AF
-            .request(environment.baseURL + service.path,
-                     method: service.method,
-                     parameters: SIWAAuthRequestBody(firstName: firstName,
-                                                     lastName: lastName,
-                                                     appleIdentityToken: identityTokenString),
-                     encoder: JSONParameterEncoder.default)
-            .serializingDecodable(UserResponse.self)
-        
-        let userResponse = try await request.value
-        if let accessToken = userResponse.accessToken {
-            keychain.set(accessToken, forKey: accessTokenKey)
-            await MainActor.run {
-                self.accessToken = accessToken
-                self.user = userResponse.user
-            }
-            
-        } else {
-            throw UserRepository.Error.accessTokenNotInResponse
+        guard let accessToken = userResponse.accessToken else { throw UserRepository.Error.accessTokenNotInResponse }
+        keychain.set(accessToken, forKey: accessTokenKey)
+        await MainActor.run {
+            self.user = userResponse.user
+            self.accessToken = accessToken
         }
     }
 }

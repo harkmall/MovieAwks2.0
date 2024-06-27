@@ -8,38 +8,27 @@
 import Foundation
 import Alamofire
 
-enum AuthService {
-    case authWithSIWA(firstName: String?, lastName: String?, appleIdentityToken: String)
+protocol AuthServiceType: Service {
+    func authWithSIWA(firstName: String?, lastName: String?, appleIdentityToken: Data?) async throws -> UserResponse
 }
 
-extension AuthService: Service {
-    var path: String {
-        switch self {
-        case .authWithSIWA:
-            return "/api/auth/siwa"
-        }
+struct AuthService: AuthServiceType {
+    var environment: Networking.Environment
+
+    func authWithSIWA(firstName: String?, lastName: String?, appleIdentityToken: Data?) async throws -> UserResponse {
+        guard let appleIdentityToken = appleIdentityToken else { throw APIError.identityTokenMissing }
+        guard let identityTokenString = String(data: appleIdentityToken, encoding: .utf8) else { throw APIError.unableToDecodeIdentityToken }
+        
+        let request = AF
+            .request(environment.baseURL + "/api/auth/siwa",
+                     method: .post,
+                     parameters: SIWAAuthRequestBody(firstName: firstName,
+                                                     lastName: lastName,
+                                                     appleIdentityToken: identityTokenString),
+                     encoder: JSONParameterEncoder.default)
+            .serializingDecodable(UserResponse.self)
+        
+        return try await request.value
     }
     
-    var parameters: Encodable? {
-        switch self {
-        case .authWithSIWA(let firstName, let lastName, let appleIdentityToken):
-            return SIWAAuthRequestBody(firstName: firstName,
-                                       lastName: lastName,
-                                       appleIdentityToken: appleIdentityToken)
-        }
-    }
-    
-    var method: HTTPMethod {
-        switch self {
-        case .authWithSIWA:
-            return .post
-        }
-    }
-    
-    var headers: HTTPHeaders? {
-        switch self {
-        case .authWithSIWA:
-            return nil
-        }
-    }
 }
