@@ -15,7 +15,7 @@ struct TrendingItemView: View {
         VStack(alignment: .leading) {
             Text(trendingItem.title ?? "")
                 .font(.title3)
-            AsyncImage(url: try? trendingItem.posterPath?.asURL()) { image in
+            AsyncImage(url: try? trendingItem.backdropPath?.asURL()) { image in
                 image.resizable().scaledToFit()
             } placeholder: {
                 ProgressView()
@@ -29,7 +29,7 @@ struct TrendingItemView: View {
 
 #Preview {
     TrendingItemView(trendingItem: TrendingObject(adult: true,
-                                                  backdropPath: "/wNAhuOZ3Zf84jCIlrcI6JhgmY5q.jpg",
+                                                  backdropPath: "https://image.tmdb.org/t/p/w1280/wNAhuOZ3Zf84jCIlrcI6JhgmY5q.jpg",
                                                   id: 1,
                                                   title: "Furiosa: A Mad Max Saga",
                                                   originalTitle: "Furiosa: A Mad Max Saga",

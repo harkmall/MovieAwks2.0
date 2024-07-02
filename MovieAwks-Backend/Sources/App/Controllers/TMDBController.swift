@@ -14,19 +14,29 @@ struct TMDBController {
     
     @Sendable
     private func trending(req: Request) async throws -> TrendingResponse {
+        
+        let configuration = try await imagesConfiguration(req: req)
+        
         guard let tmbdAuthToken = tmbdAuthToken else { throw Abort(.badRequest, reason: "TMDB Auth Token not found") }
         guard let trendingType = req.parameters.get("type"),
               let type = TrendingObject.MediaType(rawValue: trendingType) else { throw Abort(.notFound) }
         
         let timeFrame = req.query["time"] ?? "week"
         let page = req.query["page"] ?? 1
-        return try await req.client
-            .get("https://api.themoviedb.org/3/trending/\(type.rawValue)/\(timeFrame)") { req in
-                try req.query.encode(["language": "en-US", "page": "\(page)"])
-                req.headers.bearerAuthorization = .init(token: tmbdAuthToken)
+        
+        var trendingResponse = try await req.client
+            .get("https://api.themoviedb.org/3/trending/\(type.rawValue)/\(timeFrame)") {
+                try $0.query.encode(["language": "en-US", "page": "\(page)"])
+                $0.headers.bearerAuthorization = .init(token: tmbdAuthToken)
             }
             .content
             .decode(TrendingResponse.self)
+        
+        for index in trendingResponse.results.indices {
+            trendingResponse.results[index].buildImageUrls(with: configuration)
+        }
+        
+        return trendingResponse
     }
     
     @Sendable
@@ -37,8 +47,8 @@ struct TMDBController {
         guard let tmbdAuthToken = tmbdAuthToken else { throw Abort(.badRequest, reason: "TMDB Auth Token not found") }
         
         let imageConfiguration = try await req.client
-            .get("https://api.themoviedb.org/3/configuration") { req in
-                req.headers.bearerAuthorization = .init(token: tmbdAuthToken)
+            .get("https://api.themoviedb.org/3/configuration") {
+                $0.headers.bearerAuthorization = .init(token: tmbdAuthToken)
             }
             .content
             .decode(ConfigurationResponse.self)

@@ -10,7 +10,7 @@ import Vapor
 
 struct TrendingResponse: Content {
     let page: Int?
-    let results: [TrendingObject]
+    var results: [TrendingObject]
     let totalPages: Int?
     let totalResults: Int?
 }
