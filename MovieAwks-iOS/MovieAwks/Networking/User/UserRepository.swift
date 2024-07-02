@@ -14,13 +14,13 @@ class UserRepository: ObservableObject {
     @Published var accessToken: String?
     @Published var user: User?
     
-    private let userService: UserService
-    private let authService: AuthService
+    private let userService: UserServiceType
+    private let authService: AuthServiceType
     private let keychain = KeychainSwift()
     private let accessTokenKey = "ACCESS_TOKEN"
     
-    init(userService: UserService = UserService(environment: .current),
-         authService: AuthService = AuthService(environment: .current)) {
+    init(userService: UserServiceType = UserService(environment: .current),
+         authService: AuthServiceType = AuthService(environment: .current)) {
         self.userService = userService
         self.authService = authService
         self.accessToken = keychain.get(accessTokenKey)

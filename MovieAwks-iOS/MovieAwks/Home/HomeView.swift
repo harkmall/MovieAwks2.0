@@ -9,28 +9,36 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @EnvironmentObject var userRepo: UserRepository
+    @StateObject var homeViewModel: HomeViewModel
+    
+    init(homeViewModel: HomeViewModel) {
+        _homeViewModel = StateObject(wrappedValue: homeViewModel)
+    }
     
     var body: some View {
-        Group {
+        VStack {
+            List {
+                ForEach(homeViewModel.trendingItems, id: \.id) { item in
+                    TrendingItemView(trendingItem: item)
+                }
+            }
             Spacer()
-            Text("\(userRepo.user?.firstName ?? ":P") \(userRepo.user?.lastName ?? ":PP")")
+            Text(self.homeViewModel.name)
             Spacer()
             Button(action: {
-                userRepo.logoutUser()
+                homeViewModel.logoutUser()
             }, label: {
                 Text("Logout")
             })
         }
         .onAppear(perform: {
             Task {
-                try await userRepo.getUser()
+                await [try homeViewModel.getUser(), homeViewModel.getTrendingItems()]
             }
         })
     }
 }
 
 #Preview {
-    HomeView()
-        .environmentObject(UserRepository(environment: .development))
+    HomeView(homeViewModel: HomeViewModel(userRepository: UserRepository()))
 }

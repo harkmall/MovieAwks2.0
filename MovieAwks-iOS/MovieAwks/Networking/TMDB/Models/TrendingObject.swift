@@ -1,14 +1,13 @@
 //
 //  TrendingObject.swift
-//
+//  MovieAwks
 //
 //  Created by Mark Hall on 2024-06-27.
 //
 
 import Foundation
-import Vapor
 
-struct TrendingObject: Content {
+struct TrendingObject: Codable {
     enum MediaType: String, Codable {
         case movie
         case tv

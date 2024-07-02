@@ -28,6 +28,10 @@
 		A7737B712C2B0CEE004944FC /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B702C2B0CEE004944FC /* Service.swift */; };
 		A7737B742C2B3730004944FC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B732C2B3730004944FC /* LoginViewModel.swift */; };
 		A7737B772C2DDAB9004944FC /* TMDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B762C2DDAB9004944FC /* TMDBService.swift */; };
+		A7737B7E2C2DF169004944FC /* TrendingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B7D2C2DF169004944FC /* TrendingResponse.swift */; };
+		A7737B802C2DF172004944FC /* TrendingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B7F2C2DF172004944FC /* TrendingObject.swift */; };
+		A7737B822C2DF5D4004944FC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B812C2DF5D4004944FC /* HomeViewModel.swift */; };
+		A7A72A272C34697B00673DD5 /* TrendingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A262C34697B00673DD5 /* TrendingItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +75,10 @@
 		A7737B702C2B0CEE004944FC /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		A7737B732C2B3730004944FC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A7737B762C2DDAB9004944FC /* TMDBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBService.swift; sourceTree = "<group>"; };
+		A7737B7D2C2DF169004944FC /* TrendingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingResponse.swift; sourceTree = "<group>"; };
+		A7737B7F2C2DF172004944FC /* TrendingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingObject.swift; sourceTree = "<group>"; };
+		A7737B812C2DF5D4004944FC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		A7A72A262C34697B00673DD5 /* TrendingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				A73FA7F52C220726008262C3 /* MovieAwksApp.swift */,
-				A7737B692C2B0258004944FC /* UserRepository.swift */,
 				A7737B562C29C944004944FC /* Networking */,
 				A7737B752C2B3EB9004944FC /* Home */,
 				A7737B722C2B3727004944FC /* Login */,
@@ -163,10 +170,12 @@
 		A7737B562C29C944004944FC /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				A7737B6F2C2B0CCF004944FC /* Services */,
 				A7737B572C29C9E7004944FC /* Networking.swift */,
 				A7737B602C29CADA004944FC /* APIError.swift */,
-				A7737B592C29CA57004944FC /* Models */,
+				A7737B702C2B0CEE004944FC /* Service.swift */,
+				A7737B7B2C2DF131004944FC /* TMDB */,
+				A7737B792C2DF116004944FC /* Auth */,
+				A7737B782C2DF0FF004944FC /* User */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -174,22 +183,10 @@
 		A7737B592C29CA57004944FC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A7737B5A2C29CA92004944FC /* SIWAAuthRequestBody.swift */,
 				A7737B5C2C29CAA2004944FC /* UserResponse.swift */,
 				A7737B5E2C29CAA9004944FC /* User.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		A7737B6F2C2B0CCF004944FC /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				A7737B702C2B0CEE004944FC /* Service.swift */,
-				A7737B6B2C2B07A2004944FC /* UserService.swift */,
-				A7737B6D2C2B0B9F004944FC /* AuthService.swift */,
-				A7737B762C2DDAB9004944FC /* TMDBService.swift */,
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 		A7737B722C2B3727004944FC /* Login */ = {
@@ -205,8 +202,55 @@
 			isa = PBXGroup;
 			children = (
 				A7737B672C2A09EA004944FC /* HomeView.swift */,
+				A7737B812C2DF5D4004944FC /* HomeViewModel.swift */,
+				A7A72A262C34697B00673DD5 /* TrendingItemView.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		A7737B782C2DF0FF004944FC /* User */ = {
+			isa = PBXGroup;
+			children = (
+				A7737B6B2C2B07A2004944FC /* UserService.swift */,
+				A7737B692C2B0258004944FC /* UserRepository.swift */,
+				A7737B592C29CA57004944FC /* Models */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		A7737B792C2DF116004944FC /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				A7737B6D2C2B0B9F004944FC /* AuthService.swift */,
+				A7737B7A2C2DF120004944FC /* Models */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		A7737B7A2C2DF120004944FC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A7737B5A2C29CA92004944FC /* SIWAAuthRequestBody.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A7737B7B2C2DF131004944FC /* TMDB */ = {
+			isa = PBXGroup;
+			children = (
+				A7737B762C2DDAB9004944FC /* TMDBService.swift */,
+				A7737B7C2C2DF157004944FC /* Models */,
+			);
+			path = TMDB;
+			sourceTree = "<group>";
+		};
+		A7737B7C2C2DF157004944FC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A7737B7D2C2DF169004944FC /* TrendingResponse.swift */,
+				A7737B7F2C2DF172004944FC /* TrendingObject.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,15 +391,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7737B822C2DF5D4004944FC /* HomeViewModel.swift in Sources */,
 				A7737B682C2A09EA004944FC /* HomeView.swift in Sources */,
+				A7737B802C2DF172004944FC /* TrendingObject.swift in Sources */,
 				A7737B712C2B0CEE004944FC /* Service.swift in Sources */,
 				A7737B5D2C29CAA2004944FC /* UserResponse.swift in Sources */,
+				A7737B7E2C2DF169004944FC /* TrendingResponse.swift in Sources */,
 				A7737B582C29C9E7004944FC /* Networking.swift in Sources */,
 				A7737B6E2C2B0B9F004944FC /* AuthService.swift in Sources */,
 				A7737B5F2C29CAA9004944FC /* User.swift in Sources */,
 				A7737B5B2C29CA92004944FC /* SIWAAuthRequestBody.swift in Sources */,
 				A73FA7F82C220726008262C3 /* LoginView.swift in Sources */,
 				A7737B742C2B3730004944FC /* LoginViewModel.swift in Sources */,
+				A7A72A272C34697B00673DD5 /* TrendingItemView.swift in Sources */,
 				A7737B6C2C2B07A2004944FC /* UserService.swift in Sources */,
 				A73FA7F62C220726008262C3 /* MovieAwksApp.swift in Sources */,
 				A7737B612C29CADA004944FC /* APIError.swift in Sources */,

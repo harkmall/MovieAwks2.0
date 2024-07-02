@@ -9,7 +9,7 @@ import Foundation
 import AuthenticationServices
 
 class LoginViewModel: ObservableObject {
-    var userRepo: UserRepository
+    let userRepo: UserRepository
     
     @Published var error: Error?
     @Published var isLoading: Bool

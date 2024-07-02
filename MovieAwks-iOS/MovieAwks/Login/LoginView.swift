@@ -53,5 +53,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(userRepo: UserRepository(environment: .development))
+    LoginView(userRepo: UserRepository())
 }

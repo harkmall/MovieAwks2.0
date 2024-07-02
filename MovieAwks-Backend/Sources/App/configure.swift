@@ -31,6 +31,10 @@ public func configure(_ app: Application) async throws {
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     ContentConfiguration.global.use(decoder: decoder, for: .json)
     
+    let encoder = JSONEncoder()
+    encoder.dateEncodingStrategy = .secondsSince1970
+    ContentConfiguration.global.use(encoder: encoder, for: .json)
+    
     // register routes
     try routes(app)
 }

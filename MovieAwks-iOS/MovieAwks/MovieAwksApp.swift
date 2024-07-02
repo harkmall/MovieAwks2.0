@@ -10,15 +10,14 @@ import SwiftUI
 @main
 struct MovieAwksApp: App {
     
-    @StateObject var userRepository = UserRepository(environment: .development)
+    @StateObject var userRepository = UserRepository()
     
     var body: some Scene {
         WindowGroup {
             if userRepository.accessToken == nil {
                 LoginView(userRepo: userRepository)
             } else {
-                HomeView()
-                    .environmentObject(userRepository)
+                HomeView(homeViewModel: HomeViewModel(userRepository: userRepository))
             }
         }
     }

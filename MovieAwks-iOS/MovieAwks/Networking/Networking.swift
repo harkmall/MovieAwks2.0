@@ -20,7 +20,7 @@ struct Networking {
         var baseURL: String {
             switch self {
             case .development:
-                return "https://cba3-66-203-169-98.ngrok-free.app"
+                return "https://582c-2607-fea8-28a1-b700-5df0-246f-9739-68d3.ngrok-free.app"
             case .production:
                 return "" //fix this at some point
             }
