@@ -35,7 +35,7 @@ struct TrendingItemView: View {
                                                   originalTitle: "Furiosa: A Mad Max Saga",
                                                   originalLanguage: "en",
                                                   overview: "As the world fell, young Furiosa is snatched from the Green Place of Many Mothers and falls into the hands of a great Biker Horde led by the Warlord Dementus. Sweeping through the Wasteland they come across the Citadel presided over by The Immortan Joe. While the two Tyrants war for dominance, Furiosa must survive many trials as she puts together the means to find her way home.",
-                                                  posterPath: "https://image.tmdb.org/t/p/w500/iADOJ8Zymht2JPMoy3R7xceZprc.jpg",
+                                                  posterPath: "https://image.tmdb.org/t/p/w300/iADOJ8Zymht2JPMoy3R7xceZprc.jpg",
                                                   mediaType: .movie,
                                                   genreIds: [],
                                                   popularity: 6058.314,

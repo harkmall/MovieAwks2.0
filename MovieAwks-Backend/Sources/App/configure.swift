@@ -21,6 +21,7 @@ public func configure(_ app: Application) async throws {
     
     app.migrations.add(UserMigration())
     app.migrations.add(TokenMigration())
+    app.migrations.add(ImagesConfigurationMigration())
     
     try await app.autoMigrate()
     

@@ -29,11 +29,34 @@ struct TMDBController {
             .decode(TrendingResponse.self)
     }
     
+    @Sendable
+    private func imagesConfiguration(req: Request) async throws -> ImagesConfiguration {
+        
+        if let cachedConfig = try await ImagesConfiguration.getDBConfiguration(req: req) { return cachedConfig }
+
+        guard let tmbdAuthToken = tmbdAuthToken else { throw Abort(.badRequest, reason: "TMDB Auth Token not found") }
+        
+        let imageConfiguration = try await req.client
+            .get("https://api.themoviedb.org/3/configuration") { req in
+                req.headers.bearerAuthorization = .init(token: tmbdAuthToken)
+            }
+            .content
+            .decode(ConfigurationResponse.self)
+            .images
+        
+        imageConfiguration.expiresAt = Date() + ProjectConfig.ImagesConfiguration.expirationTime
+        
+        try await imageConfiguration.save(on: req.db)
+        
+        return imageConfiguration
+    }
+    
 }
 
 // MARK: - RouteCollection
 extension TMDBController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         routes.get("trending",":type", use: trending)
+        routes.get("imagesConfiguration", use: imagesConfiguration)
     }
 }

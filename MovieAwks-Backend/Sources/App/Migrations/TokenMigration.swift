@@ -7,10 +7,10 @@
 
 import Fluent
 
-struct TokenMigration: Migration {
+struct TokenMigration: AsyncMigration {
     
-    func prepare(on database: Database) -> EventLoopFuture<Void> {
-        database.schema(Token.schema)
+    func prepare(on database: Database) async throws {
+        try await database.schema(Token.schema)
             .field("id", .uuid, .identifier(auto: false))
             .field("userID", .uuid, .references("users", "id"))
             .field("value", .string, .required)
@@ -20,7 +20,7 @@ struct TokenMigration: Migration {
             .create()
     }
     
-    func revert(on database: Database) -> EventLoopFuture<Void> {
-        database.schema(Token.schema).delete()
+    func revert(on database: Database) async throws {
+        try await database.schema(Token.schema).delete()
     }
 }
