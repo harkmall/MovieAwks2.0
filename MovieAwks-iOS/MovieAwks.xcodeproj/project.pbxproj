@@ -35,6 +35,7 @@
 		A7A72A2A2C35A49F00673DD5 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A292C35A49F00673DD5 /* DetailView.swift */; };
 		A7A72A2D2C35C92C00673DD5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A2C2C35C92C00673DD5 /* ProfileView.swift */; };
 		A7A72A2F2C35CFCA00673DD5 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A2E2C35CFCA00673DD5 /* ProfileViewModel.swift */; };
+		A7A72A312C35D3BA00673DD5 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A302C35D3BA00673DD5 /* DetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		A7A72A292C35A49F00673DD5 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		A7A72A2C2C35C92C00673DD5 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A7A72A2E2C35CFCA00673DD5 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		A7A72A302C35D3BA00673DD5 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				A7A72A292C35A49F00673DD5 /* DetailView.swift */,
+				A7A72A302C35D3BA00673DD5 /* DetailViewModel.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				A7A72A2F2C35CFCA00673DD5 /* ProfileViewModel.swift in Sources */,
 				A7737B582C29C9E7004944FC /* Networking.swift in Sources */,
 				A7737B6E2C2B0B9F004944FC /* AuthService.swift in Sources */,
+				A7A72A312C35D3BA00673DD5 /* DetailViewModel.swift in Sources */,
 				A7737B5F2C29CAA9004944FC /* User.swift in Sources */,
 				A7737B5B2C29CA92004944FC /* SIWAAuthRequestBody.swift in Sources */,
 				A73FA7F82C220726008262C3 /* LoginView.swift in Sources */,
