@@ -12,16 +12,34 @@ struct TrendingItemView: View {
     let trendingItem: TrendingObject
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(trendingItem.title ?? "")
-                .font(.title3)
-            AsyncImage(url: try? trendingItem.backdropPath?.asURL()) { image in
-                image.resizable().scaledToFit()
-            } placeholder: {
-                ProgressView()
+        VStack {
+//            GeometryReader { geometry in
+//                AsyncImage(url: try? trendingItem.backdropPath?.asURL()) { image in
+//                    image
+//                        .resizable()
+//                        .scaledToFill()
+//                } placeholder: { }
+//                    .blur(radius: 20)
+//                    .frame(width: geometry.size.width)
+//            }
+//            
+            VStack(alignment: .leading) {
+                Text(trendingItem.title ?? "")
+                    .font(.title3)
+                    .bold()
+                AsyncImage(url: try? trendingItem.posterPath?.asURL()) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(height: 200)
+                Text(trendingItem.overview ?? "")
+                    .font(.subheadline)
             }
-            .frame(height: 300)
-            Text(trendingItem.overview ?? "")
+//            .offset(y: -200)
+//            .padding(.bottom, -200)
         }
     }
 }

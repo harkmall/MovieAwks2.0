@@ -17,19 +17,21 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
-            List {
-                ForEach(homeViewModel.trendingItems, id: \.id) { item in
-                    TrendingItemView(trendingItem: item)
+            NavigationStack{
+                List(homeViewModel.trendingItems, id: \.id) { trendingItem in
+                    NavigationLink(destination: DetailView()) {
+                        TrendingItemView(trendingItem: trendingItem)
+                    }
+                }
+                .navigationTitle("Trending")
+                .toolbar {
+                    ToolbarItem {
+                        NavigationLink(destination: ProfileView(profileViewModel: .init(userRepo: homeViewModel.userRepo))) {
+                            Image(systemName: "person")
+                        }
+                    }
                 }
             }
-            Spacer()
-            Text(self.homeViewModel.name)
-            Spacer()
-            Button(action: {
-                homeViewModel.logoutUser()
-            }, label: {
-                Text("Logout")
-            })
         }
         .onAppear(perform: {
             Task {

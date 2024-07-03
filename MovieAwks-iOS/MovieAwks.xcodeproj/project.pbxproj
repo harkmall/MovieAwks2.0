@@ -32,6 +32,9 @@
 		A7737B802C2DF172004944FC /* TrendingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B7F2C2DF172004944FC /* TrendingObject.swift */; };
 		A7737B822C2DF5D4004944FC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B812C2DF5D4004944FC /* HomeViewModel.swift */; };
 		A7A72A272C34697B00673DD5 /* TrendingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A262C34697B00673DD5 /* TrendingItemView.swift */; };
+		A7A72A2A2C35A49F00673DD5 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A292C35A49F00673DD5 /* DetailView.swift */; };
+		A7A72A2D2C35C92C00673DD5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A2C2C35C92C00673DD5 /* ProfileView.swift */; };
+		A7A72A2F2C35CFCA00673DD5 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A2E2C35CFCA00673DD5 /* ProfileViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +82,9 @@
 		A7737B7F2C2DF172004944FC /* TrendingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingObject.swift; sourceTree = "<group>"; };
 		A7737B812C2DF5D4004944FC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A7A72A262C34697B00673DD5 /* TrendingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingItemView.swift; sourceTree = "<group>"; };
+		A7A72A292C35A49F00673DD5 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		A7A72A2C2C35C92C00673DD5 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		A7A72A2E2C35CFCA00673DD5 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +140,8 @@
 				A73FA7F52C220726008262C3 /* MovieAwksApp.swift */,
 				A7737B562C29C944004944FC /* Networking */,
 				A7737B752C2B3EB9004944FC /* Home */,
+				A7A72A282C35A48D00673DD5 /* Detail */,
+				A7A72A2B2C35C91F00673DD5 /* Profile */,
 				A7737B722C2B3727004944FC /* Login */,
 				A73FA7F92C220727008262C3 /* Assets.xcassets */,
 				A73FA7FB2C220727008262C3 /* MovieAwks.entitlements */,
@@ -251,6 +259,23 @@
 				A7737B7F2C2DF172004944FC /* TrendingObject.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		A7A72A282C35A48D00673DD5 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				A7A72A292C35A49F00673DD5 /* DetailView.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		A7A72A2B2C35C91F00673DD5 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				A7A72A2C2C35C92C00673DD5 /* ProfileView.swift */,
+				A7A72A2E2C35CFCA00673DD5 /* ProfileViewModel.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,16 +422,19 @@
 				A7737B712C2B0CEE004944FC /* Service.swift in Sources */,
 				A7737B5D2C29CAA2004944FC /* UserResponse.swift in Sources */,
 				A7737B7E2C2DF169004944FC /* TrendingResponse.swift in Sources */,
+				A7A72A2F2C35CFCA00673DD5 /* ProfileViewModel.swift in Sources */,
 				A7737B582C29C9E7004944FC /* Networking.swift in Sources */,
 				A7737B6E2C2B0B9F004944FC /* AuthService.swift in Sources */,
 				A7737B5F2C29CAA9004944FC /* User.swift in Sources */,
 				A7737B5B2C29CA92004944FC /* SIWAAuthRequestBody.swift in Sources */,
 				A73FA7F82C220726008262C3 /* LoginView.swift in Sources */,
 				A7737B742C2B3730004944FC /* LoginViewModel.swift in Sources */,
+				A7A72A2D2C35C92C00673DD5 /* ProfileView.swift in Sources */,
 				A7A72A272C34697B00673DD5 /* TrendingItemView.swift in Sources */,
 				A7737B6C2C2B07A2004944FC /* UserService.swift in Sources */,
 				A73FA7F62C220726008262C3 /* MovieAwksApp.swift in Sources */,
 				A7737B612C29CADA004944FC /* APIError.swift in Sources */,
+				A7A72A2A2C35A49F00673DD5 /* DetailView.swift in Sources */,
 				A7737B772C2DDAB9004944FC /* TMDBService.swift in Sources */,
 				A7737B6A2C2B0258004944FC /* UserRepository.swift in Sources */,
 			);

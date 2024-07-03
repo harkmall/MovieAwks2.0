@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class HomeViewModel: ObservableObject {
-    private let userRepo: UserRepository
+    let userRepo: UserRepository
     private let tmdbService: TMDBServiceType
     private var cancellables: Set<AnyCancellable> = []
     
