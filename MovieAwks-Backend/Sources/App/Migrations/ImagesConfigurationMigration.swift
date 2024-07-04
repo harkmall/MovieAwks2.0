@@ -10,7 +10,7 @@ import Fluent
 struct ImagesConfigurationMigration: AsyncMigration {
     func prepare(on database: any Database) async throws {
         try await database.schema(ImagesConfiguration.schema)
-            .field("id", .uuid, .identifier(auto: false))
+            .id()
             .field("baseUrl", .string, .required)
             .field("secureBaseUrl", .string, .required)
             .field("backdropSizes", .array(of: .string), .required)
