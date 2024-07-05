@@ -44,11 +44,11 @@ struct TMDBController {
         
         if let cachedConfig = try await ImagesConfiguration.getDBConfiguration(req: req) { return cachedConfig }
 
-        guard let tmbdAuthToken = tmbdAuthToken else { throw Abort(.badRequest, reason: "TMDB Auth Token not found") }
+        guard let tmdbAuthToken = tmbdAuthToken else { throw Abort(.badRequest, reason: "TMDB Auth Token not found") }
         
         let imageConfiguration = try await req.client
             .get("https://api.themoviedb.org/3/configuration") {
-                $0.headers.bearerAuthorization = .init(token: tmbdAuthToken)
+                $0.headers.bearerAuthorization = .init(token: tmdbAuthToken)
             }
             .content
             .decode(ConfigurationResponse.self)
@@ -61,6 +61,25 @@ struct TMDBController {
         return imageConfiguration
     }
     
+    @Sendable
+    private func movieDetail(req: Request) async throws -> MovieDetail {
+        guard let tmdbAuthToken = tmbdAuthToken else { throw Abort(.badRequest, reason: "TMDB Auth Token not found") }
+        guard let movieId = req.parameters.get("id", as: Int.self) else { throw Abort(.badRequest, reason: "MovieId not present in request") }
+        
+        let configuration = try await imagesConfiguration(req: req)
+        
+        var movieDetailResponse = try await req.client
+            .get("https://api.themoviedb.org/3/movie/\(movieId)") {
+                $0.headers.bearerAuthorization = .init(token: tmdbAuthToken)
+            }
+            .content
+            .decode(MovieDetail.self)
+        
+        movieDetailResponse.buildImageUrls(with: configuration)
+        
+        return movieDetailResponse
+    }
+    
 }
 
 // MARK: - RouteCollection
@@ -68,5 +87,6 @@ extension TMDBController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         routes.get("trending",":type", use: trending)
         routes.get("imagesConfiguration", use: imagesConfiguration)
+        routes.get("movies", "details", ":id", use: movieDetail)
     }
 }

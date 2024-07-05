@@ -23,6 +23,9 @@ protocol TMDBServiceType: Service {
                      type: TrendingType,
                      timeFrame: TrendingTimeFrame,
                      page: Int) async throws -> TrendingResponse
+    
+    func getMovieDetails(accessToken: String,
+                         movieId: Int) async throws -> MovieDetail
 }
 
 struct TMDBService: TMDBServiceType {
@@ -46,6 +49,16 @@ struct TMDBService: TMDBServiceType {
                      parameters: ["time": timeFrame.rawValue, "page": "\(page)"],
                      headers: [.authorization(bearerToken: accessToken)])
             .serializingDecodable(TrendingResponse.self, 
+                                  decoder: self.responseJSONDecoder)
+            .value
+    }
+    
+    func getMovieDetails(accessToken: String,
+                         movieId: Int) async throws -> MovieDetail {
+        return try await AF
+            .request(environment.baseURL + "/api/movies/details/\(movieId)",
+                     headers: [.authorization(bearerToken: accessToken)])
+            .serializingDecodable(MovieDetail.self,
                                   decoder: self.responseJSONDecoder)
             .value
     }

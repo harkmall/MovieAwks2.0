@@ -16,6 +16,7 @@ class DetailViewModel: ObservableObject {
     @Published var averageRating: String = ""
     @Published var totalRatings: String = ""
     @Published var movieRatings: [MovieRating] = []
+    @Published var movieDetails: MovieDetail?
     @Published var error: Error?
     
     init(itemId: Int,
@@ -26,6 +27,28 @@ class DetailViewModel: ObservableObject {
         self.tmdbService = tmdbService
         self.movieRatingsService = movieRatingsService
         self.itemId = itemId
+    }
+    
+    func getMovieDetails() async {
+        guard let accessToken = userRepo.accessToken else {
+            await MainActor.run {
+                self.error = APIError.identityTokenMissing
+            }
+            return
+        }
+        
+        do {
+            let movieDetails = try await self.tmdbService
+                .getMovieDetails(accessToken: accessToken,
+                                 movieId: itemId)
+            await MainActor.run {
+                self.movieDetails = movieDetails
+            }
+        } catch {
+            await MainActor.run {
+                self.error = error
+            }
+        }
     }
     
     func getMovieRatings() async {

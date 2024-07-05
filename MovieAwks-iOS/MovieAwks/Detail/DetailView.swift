@@ -17,6 +17,22 @@ struct DetailView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
+            VStack(alignment: .leading) {
+                Text(detailViewModel.movieDetails?.title ?? "")
+                    .font(.title3)
+                    .bold()
+                AsyncImage(url: try? detailViewModel.movieDetails?.posterPath?.asURL()) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(height: 200)
+                Text(detailViewModel.movieDetails?.overview ?? "")
+                    .font(.subheadline)
+            }
+            
             Text("Average: " + detailViewModel.averageRating)
                 .font(.title)
             Text("Total Ratings: " + detailViewModel.totalRatings)
@@ -32,7 +48,7 @@ struct DetailView: View {
         }
         .onAppear {
             Task {
-                await detailViewModel.getMovieRatings()
+                await [detailViewModel.getMovieRatings(), detailViewModel.getMovieDetails()]
             }
         }
     }

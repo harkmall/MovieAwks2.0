@@ -35,23 +35,23 @@ struct TrendingObject: Content {
 // MARK: - Image URLs
 
 //last one should be "original", so get the one before "original"
-extension TrendingObject {
-    mutating func buildImageUrls(with configuration: ImagesConfiguration) {
-        buildBackdropUrl(with: configuration)
-        buildPosterPath(with: configuration)
-    }
-    
-    private mutating func buildBackdropUrl(with configuration: ImagesConfiguration) {
-        let backdropSizeIndex = (configuration.backdropSizes?.count ?? 2) - 2
-        let backdropSize = configuration.backdropSizes?[backdropSizeIndex] ?? ""
-        
-        backdropPath = (configuration.secureBaseUrl ?? "") + (backdropSize) + (backdropPath ?? "")
-    }
-    
-    private mutating func buildPosterPath(with configuration: ImagesConfiguration) {
-        let posterSizeIndex = (configuration.posterSizes?.count ?? 2) - 2
-        let posterSize = configuration.posterSizes?[posterSizeIndex] ?? ""
-        
-        posterPath = (configuration.secureBaseUrl ?? "") + (posterSize) + (posterPath ?? "")
-    }
+extension TrendingObject: ImagePathBuildable {
+//    mutating func buildImageUrls(with configuration: ImagesConfiguration) {
+//        buildBackdropUrl(with: configuration)
+//        buildPosterPath(with: configuration)
+//    }
+//    
+//    private mutating func buildBackdropUrl(with configuration: ImagesConfiguration) {
+//        let backdropSizeIndex = (configuration.backdropSizes?.count ?? 2) - 2
+//        let backdropSize = configuration.backdropSizes?[backdropSizeIndex] ?? ""
+//        
+//        backdropPath = (configuration.secureBaseUrl ?? "") + (backdropSize) + (backdropPath ?? "")
+//    }
+//    
+//    private mutating func buildPosterPath(with configuration: ImagesConfiguration) {
+//        let posterSizeIndex = (configuration.posterSizes?.count ?? 2) - 2
+//        let posterSize = configuration.posterSizes?[posterSizeIndex] ?? ""
+//        
+//        posterPath = (configuration.secureBaseUrl ?? "") + (posterSize) + (posterPath ?? "")
+//    }
 }

@@ -39,6 +39,7 @@
 		A7A72A342C38320F00673DD5 /* MovieRatingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A332C38320F00673DD5 /* MovieRatingsService.swift */; };
 		A7A72A372C38324700673DD5 /* MovieRatingsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A362C38324700673DD5 /* MovieRatingsResponse.swift */; };
 		A7A72A392C38326C00673DD5 /* MovieRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A382C38326C00673DD5 /* MovieRating.swift */; };
+		A7A72A3B2C385FB800673DD5 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A3A2C385FB800673DD5 /* MovieDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		A7A72A332C38320F00673DD5 /* MovieRatingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRatingsService.swift; sourceTree = "<group>"; };
 		A7A72A362C38324700673DD5 /* MovieRatingsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRatingsResponse.swift; sourceTree = "<group>"; };
 		A7A72A382C38326C00673DD5 /* MovieRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRating.swift; sourceTree = "<group>"; };
+		A7A72A3A2C385FB800673DD5 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +268,7 @@
 			children = (
 				A7737B7D2C2DF169004944FC /* TrendingResponse.swift */,
 				A7737B7F2C2DF172004944FC /* TrendingObject.swift */,
+				A7A72A3A2C385FB800673DD5 /* MovieDetail.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				A7A72A272C34697B00673DD5 /* TrendingItemView.swift in Sources */,
 				A7737B6C2C2B07A2004944FC /* UserService.swift in Sources */,
 				A73FA7F62C220726008262C3 /* MovieAwksApp.swift in Sources */,
+				A7A72A3B2C385FB800673DD5 /* MovieDetail.swift in Sources */,
 				A7737B612C29CADA004944FC /* APIError.swift in Sources */,
 				A7A72A2A2C35A49F00673DD5 /* DetailView.swift in Sources */,
 				A7737B772C2DDAB9004944FC /* TMDBService.swift in Sources */,
