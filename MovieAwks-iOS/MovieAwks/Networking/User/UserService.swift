@@ -13,7 +13,7 @@ protocol UserServiceType: Service {
 }
 
 struct UserService: UserServiceType {
-    var environment: Networking.Environment
+    let environment: Networking.Environment
     
     init(environment: Networking.Environment = .development) {
         self.environment = environment

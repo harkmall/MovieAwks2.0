@@ -13,7 +13,7 @@ protocol AuthServiceType: Service {
 }
 
 struct AuthService: AuthServiceType {
-    var environment: Networking.Environment
+    let environment: Networking.Environment
 
     func authWithSIWA(firstName: String?, lastName: String?, appleIdentityToken: Data?) async throws -> UserResponse {
         guard let appleIdentityToken = appleIdentityToken else { throw APIError.identityTokenMissing }

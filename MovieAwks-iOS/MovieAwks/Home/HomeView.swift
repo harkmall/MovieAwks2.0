@@ -19,7 +19,8 @@ struct HomeView: View {
         VStack {
             NavigationStack{
                 List(homeViewModel.trendingItems, id: \.id) { trendingItem in
-                    NavigationLink(destination: DetailView()) {
+                    NavigationLink(destination: DetailView(detailViewModel: DetailViewModel(itemId: trendingItem.id,
+                                                                                            userRepo: homeViewModel.userRepo))) {
                         TrendingItemView(trendingItem: trendingItem)
                     }
                 }

@@ -32,7 +32,10 @@ struct MovieRatingController {
             .all()
         
         let totalRatings = ratings.count
-        let averageRating = ratings.map { $0.rating }.reduce(0, +) / Float(totalRatings)
+        var averageRating: Float = 0
+        if totalRatings > 0 {
+            averageRating = ratings.map { $0.rating }.reduce(0, +) / Float(totalRatings)
+        }
         
         return MovieRatingsResponse(ratings: ratings, 
                                     totalRatings: totalRatings,

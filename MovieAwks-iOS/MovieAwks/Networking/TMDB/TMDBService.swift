@@ -26,7 +26,7 @@ protocol TMDBServiceType: Service {
 }
 
 struct TMDBService: TMDBServiceType {
-    var environment: Networking.Environment
+    let environment: Networking.Environment
     
     let responseJSONDecoder: JSONDecoder
     
@@ -45,7 +45,8 @@ struct TMDBService: TMDBServiceType {
             .request(environment.baseURL + "/api/trending/\(type.rawValue)",
                      parameters: ["time": timeFrame.rawValue, "page": "\(page)"],
                      headers: [.authorization(bearerToken: accessToken)])
-            .serializingDecodable(TrendingResponse.self, decoder: self.responseJSONDecoder)
+            .serializingDecodable(TrendingResponse.self, 
+                                  decoder: self.responseJSONDecoder)
             .value
     }
 }

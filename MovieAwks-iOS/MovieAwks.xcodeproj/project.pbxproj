@@ -36,6 +36,9 @@
 		A7A72A2D2C35C92C00673DD5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A2C2C35C92C00673DD5 /* ProfileView.swift */; };
 		A7A72A2F2C35CFCA00673DD5 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A2E2C35CFCA00673DD5 /* ProfileViewModel.swift */; };
 		A7A72A312C35D3BA00673DD5 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A302C35D3BA00673DD5 /* DetailViewModel.swift */; };
+		A7A72A342C38320F00673DD5 /* MovieRatingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A332C38320F00673DD5 /* MovieRatingsService.swift */; };
+		A7A72A372C38324700673DD5 /* MovieRatingsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A362C38324700673DD5 /* MovieRatingsResponse.swift */; };
+		A7A72A392C38326C00673DD5 /* MovieRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A382C38326C00673DD5 /* MovieRating.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +90,9 @@
 		A7A72A2C2C35C92C00673DD5 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A7A72A2E2C35CFCA00673DD5 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		A7A72A302C35D3BA00673DD5 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		A7A72A332C38320F00673DD5 /* MovieRatingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRatingsService.swift; sourceTree = "<group>"; };
+		A7A72A362C38324700673DD5 /* MovieRatingsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRatingsResponse.swift; sourceTree = "<group>"; };
+		A7A72A382C38326C00673DD5 /* MovieRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRating.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +190,7 @@
 				A7737B602C29CADA004944FC /* APIError.swift */,
 				A7737B702C2B0CEE004944FC /* Service.swift */,
 				A7737B7B2C2DF131004944FC /* TMDB */,
+				A7A72A322C3831F200673DD5 /* Ratings */,
 				A7737B792C2DF116004944FC /* Auth */,
 				A7737B782C2DF0FF004944FC /* User */,
 			);
@@ -279,6 +286,24 @@
 				A7A72A2E2C35CFCA00673DD5 /* ProfileViewModel.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		A7A72A322C3831F200673DD5 /* Ratings */ = {
+			isa = PBXGroup;
+			children = (
+				A7A72A332C38320F00673DD5 /* MovieRatingsService.swift */,
+				A7A72A352C38323B00673DD5 /* Models */,
+			);
+			path = Ratings;
+			sourceTree = "<group>";
+		};
+		A7A72A352C38323B00673DD5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A7A72A362C38324700673DD5 /* MovieRatingsResponse.swift */,
+				A7A72A382C38326C00673DD5 /* MovieRating.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -426,6 +451,7 @@
 				A7737B5D2C29CAA2004944FC /* UserResponse.swift in Sources */,
 				A7737B7E2C2DF169004944FC /* TrendingResponse.swift in Sources */,
 				A7A72A2F2C35CFCA00673DD5 /* ProfileViewModel.swift in Sources */,
+				A7A72A392C38326C00673DD5 /* MovieRating.swift in Sources */,
 				A7737B582C29C9E7004944FC /* Networking.swift in Sources */,
 				A7737B6E2C2B0B9F004944FC /* AuthService.swift in Sources */,
 				A7A72A312C35D3BA00673DD5 /* DetailViewModel.swift in Sources */,
@@ -433,6 +459,8 @@
 				A7737B5B2C29CA92004944FC /* SIWAAuthRequestBody.swift in Sources */,
 				A73FA7F82C220726008262C3 /* LoginView.swift in Sources */,
 				A7737B742C2B3730004944FC /* LoginViewModel.swift in Sources */,
+				A7A72A342C38320F00673DD5 /* MovieRatingsService.swift in Sources */,
+				A7A72A372C38324700673DD5 /* MovieRatingsResponse.swift in Sources */,
 				A7A72A2D2C35C92C00673DD5 /* ProfileView.swift in Sources */,
 				A7A72A272C34697B00673DD5 /* TrendingItemView.swift in Sources */,
 				A7737B6C2C2B07A2004944FC /* UserService.swift in Sources */,

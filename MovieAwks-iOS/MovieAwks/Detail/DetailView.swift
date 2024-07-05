@@ -16,11 +16,30 @@ struct DetailView: View {
     }
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading) {
+            Text("Average: " + detailViewModel.averageRating)
+                .font(.title)
+            Text("Total Ratings: " + detailViewModel.totalRatings)
+                .font(.subheadline)
+            List(detailViewModel.movieRatings, id: \.id) { movieRating in
+                VStack {
+                    Text("\(movieRating.rating)")
+                    Text(movieRating.user.firstName ?? "...")
+                    Text(movieRating.comment ?? "-")
+                    Text(movieRating.createdAt?.formatted() ?? "---")
+                }
+            }
+        }
+        .onAppear {
+            Task {
+                await detailViewModel.getMovieRatings()
+            }
+        }
     }
 }
 
 #Preview {
-    DetailView(detailViewModel: DetailViewModel(itemId: "",
-                                                userRepo: UserRepository()))
+    DetailView(detailViewModel: DetailViewModel(itemId: 0,
+                                                userRepo: UserRepository(),
+                                                movieRatingsService: MovieRatingsService(environment: .current)))
 }
