@@ -11,6 +11,9 @@ import Alamofire
 protocol MovieRatingsServiceType: Service {
     func getRatings(accessToken: String,
                     forMovie id: Int) async throws -> MovieRatingsResponse
+    
+    func saveMovieRating(accessToken: String,
+                         with body: MovieRatingRequestBody) async throws
 }
 
 struct MovieRatingsService: MovieRatingsServiceType {
@@ -31,6 +34,17 @@ struct MovieRatingsService: MovieRatingsServiceType {
                      headers: [.authorization(bearerToken: accessToken)])
             .serializingDecodable(MovieRatingsResponse.self, 
                                   decoder: self.responseJSONDecoder)
+            .value
+    }
+    
+    func saveMovieRating(accessToken: String,
+                         with body: MovieRatingRequestBody) async throws {
+        _ = try await AF
+            .request(environment.baseURL + "/api/movies/ratings",
+                     method: .post,
+                     parameters: body,
+                     headers: [.authorization(bearerToken: accessToken)])
+            .serializingDecodable(Empty.self)
             .value
     }
 }

@@ -40,6 +40,9 @@
 		A7A72A372C38324700673DD5 /* MovieRatingsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A362C38324700673DD5 /* MovieRatingsResponse.swift */; };
 		A7A72A392C38326C00673DD5 /* MovieRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A382C38326C00673DD5 /* MovieRating.swift */; };
 		A7A72A3B2C385FB800673DD5 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A3A2C385FB800673DD5 /* MovieDetail.swift */; };
+		A7A72A3E2C38694D00673DD5 /* AddRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A3D2C38694D00673DD5 /* AddRatingView.swift */; };
+		A7A72A402C3C30FF00673DD5 /* AddRatingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A3F2C3C30FF00673DD5 /* AddRatingViewModel.swift */; };
+		A7A72A422C3C3AEA00673DD5 /* MovieRatingRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A412C3C3AEA00673DD5 /* MovieRatingRequestBody.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +98,9 @@
 		A7A72A362C38324700673DD5 /* MovieRatingsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRatingsResponse.swift; sourceTree = "<group>"; };
 		A7A72A382C38326C00673DD5 /* MovieRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRating.swift; sourceTree = "<group>"; };
 		A7A72A3A2C385FB800673DD5 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
+		A7A72A3D2C38694D00673DD5 /* AddRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRatingView.swift; sourceTree = "<group>"; };
+		A7A72A3F2C3C30FF00673DD5 /* AddRatingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRatingViewModel.swift; sourceTree = "<group>"; };
+		A7A72A412C3C3AEA00673DD5 /* MovieRatingRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRatingRequestBody.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +157,7 @@
 				A7737B562C29C944004944FC /* Networking */,
 				A7737B752C2B3EB9004944FC /* Home */,
 				A7A72A282C35A48D00673DD5 /* Detail */,
+				A7A72A3C2C38693600673DD5 /* Add Rating */,
 				A7A72A2B2C35C91F00673DD5 /* Profile */,
 				A7737B722C2B3727004944FC /* Login */,
 				A73FA7F92C220727008262C3 /* Assets.xcassets */,
@@ -305,8 +312,18 @@
 			children = (
 				A7A72A362C38324700673DD5 /* MovieRatingsResponse.swift */,
 				A7A72A382C38326C00673DD5 /* MovieRating.swift */,
+				A7A72A412C3C3AEA00673DD5 /* MovieRatingRequestBody.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		A7A72A3C2C38693600673DD5 /* Add Rating */ = {
+			isa = PBXGroup;
+			children = (
+				A7A72A3D2C38694D00673DD5 /* AddRatingView.swift */,
+				A7A72A3F2C3C30FF00673DD5 /* AddRatingViewModel.swift */,
+			);
+			path = "Add Rating";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -448,6 +465,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7737B822C2DF5D4004944FC /* HomeViewModel.swift in Sources */,
+				A7A72A3E2C38694D00673DD5 /* AddRatingView.swift in Sources */,
 				A7737B682C2A09EA004944FC /* HomeView.swift in Sources */,
 				A7737B802C2DF172004944FC /* TrendingObject.swift in Sources */,
 				A7737B712C2B0CEE004944FC /* Service.swift in Sources */,
@@ -460,6 +478,7 @@
 				A7A72A312C35D3BA00673DD5 /* DetailViewModel.swift in Sources */,
 				A7737B5F2C29CAA9004944FC /* User.swift in Sources */,
 				A7737B5B2C29CA92004944FC /* SIWAAuthRequestBody.swift in Sources */,
+				A7A72A422C3C3AEA00673DD5 /* MovieRatingRequestBody.swift in Sources */,
 				A73FA7F82C220726008262C3 /* LoginView.swift in Sources */,
 				A7737B742C2B3730004944FC /* LoginViewModel.swift in Sources */,
 				A7A72A342C38320F00673DD5 /* MovieRatingsService.swift in Sources */,
@@ -471,6 +490,7 @@
 				A7A72A3B2C385FB800673DD5 /* MovieDetail.swift in Sources */,
 				A7737B612C29CADA004944FC /* APIError.swift in Sources */,
 				A7A72A2A2C35A49F00673DD5 /* DetailView.swift in Sources */,
+				A7A72A402C3C30FF00673DD5 /* AddRatingViewModel.swift in Sources */,
 				A7737B772C2DDAB9004944FC /* TMDBService.swift in Sources */,
 				A7737B6A2C2B0258004944FC /* UserRepository.swift in Sources */,
 			);

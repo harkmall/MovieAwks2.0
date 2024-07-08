@@ -8,10 +8,10 @@
 import Foundation
 
 class DetailViewModel: ObservableObject {
-    private let userRepo: UserRepository
+    let userRepo: UserRepository
     private let tmdbService: TMDBServiceType
     private let movieRatingsService: MovieRatingsServiceType
-    private let itemId: Int
+    let itemId: Int
     
     @Published var averageRating: String = ""
     @Published var totalRatings: String = ""

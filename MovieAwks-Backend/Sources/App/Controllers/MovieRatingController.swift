@@ -17,7 +17,7 @@ struct MovieRatingController {
                               publicObject: rating)
             .save(on: req.db)
         
-        return .ok
+        return .noContent
         
     }
     
@@ -27,7 +27,7 @@ struct MovieRatingController {
         
         let ratings = try await MovieRating.query(on: req.db)
             .filter(\.$movieId == movieId)
-            .sort(\.$createdAt)
+            .sort(\.$createdAt, .descending)
             .with(\.$user)
             .all()
         

@@ -10,6 +10,7 @@ import SwiftUI
 struct DetailView: View {
     
     @StateObject var detailViewModel: DetailViewModel
+    @State private var showAddRating = false
     
     init(detailViewModel: DetailViewModel) {
         _detailViewModel = StateObject(wrappedValue: detailViewModel)
@@ -18,9 +19,6 @@ struct DetailView: View {
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
-                Text(detailViewModel.movieDetails?.title ?? "")
-                    .font(.title3)
-                    .bold()
                 AsyncImage(url: try? detailViewModel.movieDetails?.posterPath?.asURL()) { image in
                     image
                         .resizable()
@@ -46,16 +44,36 @@ struct DetailView: View {
                 }
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle(detailViewModel.movieDetails?.title ?? "")
+        .toolbar {
+            ToolbarItem {
+                Button(action: {
+                    showAddRating.toggle()
+                }, label: {
+                    Image(systemName: "plus.square")
+                })
+                
+            }
+        }
         .onAppear {
             Task {
                 await [detailViewModel.getMovieRatings(), detailViewModel.getMovieDetails()]
             }
         }
+        .sheet(isPresented: $showAddRating, onDismiss: {
+            Task {
+                await detailViewModel.getMovieRatings()
+            }
+        }, content: {
+            AddRatingView(viewModel: AddRatingViewModel(movieId: detailViewModel.itemId,
+                                                        userRepo: detailViewModel.userRepo))
+        })
     }
 }
 
 #Preview {
-    DetailView(detailViewModel: DetailViewModel(itemId: 0,
+    DetailView(detailViewModel: DetailViewModel(itemId: 786892,
                                                 userRepo: UserRepository(),
                                                 movieRatingsService: MovieRatingsService(environment: .current)))
 }
