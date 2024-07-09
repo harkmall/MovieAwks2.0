@@ -10,7 +10,6 @@ import Alamofire
 import KeychainSwift
 
 class NetworkingManager {
- 
     let keychain: Keychain
     let environment: NetworkingManager.Environment
     

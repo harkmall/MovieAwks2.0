@@ -8,46 +8,49 @@
 import Foundation
 import AuthenticationServices
 
-@MainActor
-class LoginViewModel: ObservableObject {
-    let userRepo: UserRepository
-    
-    @Published var error: Error?
-    @Published var isLoading: Bool
-    
-    init(userRepo: UserRepository) {
-        self.userRepo = userRepo
-        self.isLoading = false
-    }
-    
-    func handle(appleAuthResult: Result<ASAuthorization, Error>) async {
-        self.isLoading = true
-        switch appleAuthResult {
-        case .success(let authResults):
-            await saveUserToDB(with: authResults)
-        case .failure(let error):
-            self.error = error
+extension LoginView {
+    @MainActor
+    class ViewModel: ObservableObject {
+        enum State {
+            case idle
+            case loading
+            case error(error: Error)
         }
         
-    }
-    
-    private func saveUserToDB(with authResults: ASAuthorization) async {
-        guard let credentials = authResults.credential as? ASAuthorizationAppleIDCredential,
-              let identityToken = credentials.identityToken else {
-            self.isLoading = false
-            self.error = APIError.identityTokenMissing
-            return
+        let userRepo: UserRepository
+        
+        @Published private(set) var state: State = .idle
+        
+        init(userRepo: UserRepository) {
+            self.userRepo = userRepo
         }
         
-        do {
-            try await userRepo.authorizeUsingSIWA(identityToken: identityToken,
-                                                  firstName: credentials.fullName?.givenName,
-                                                  lastName: credentials.fullName?.familyName)
-            try await userRepo.getUser()
-            self.isLoading = false
-        } catch {
-            self.isLoading = false
-            self.error = error
+        func handle(appleAuthResult: Result<ASAuthorization, Error>) async {
+            state = .loading
+            switch appleAuthResult {
+            case .success(let authResults):
+                await saveUserToDB(with: authResults)
+            case .failure(let error):
+                state = .error(error: error)
+            }
+            
+        }
+        
+        private func saveUserToDB(with authResults: ASAuthorization) async {
+            guard let credentials = authResults.credential as? ASAuthorizationAppleIDCredential,
+                  let identityToken = credentials.identityToken else {
+                state = .error(error: APIError.identityTokenMissing)
+                return
+            }
+            
+            do {
+                try await userRepo.authorizeUsingSIWA(identityToken: identityToken,
+                                                      firstName: credentials.fullName?.givenName,
+                                                      lastName: credentials.fullName?.familyName)
+                try await userRepo.getUser()
+            } catch {
+                self.state = .error(error: error)
+            }
         }
     }
 }

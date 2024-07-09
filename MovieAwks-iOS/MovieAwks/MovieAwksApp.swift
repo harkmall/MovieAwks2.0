@@ -19,7 +19,8 @@ struct MovieAwksApp: App {
             if userRepository.accessToken == nil {
                 LoginView(userRepo: userRepository)
             } else {
-                HomeView(homeViewModel: HomeViewModel(userRepository: userRepository))
+                HomeView(viewModel: HomeView.ViewModel())
+                    .environmentObject(userRepository)
             }
         }
     }

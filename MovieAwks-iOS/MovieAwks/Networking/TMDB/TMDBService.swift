@@ -19,20 +19,17 @@ enum TrendingTimeFrame: String {
 }
 
 protocol TMDBServiceType: Service {
-    func getTrending(accessToken: String, 
-                     type: TrendingType,
+    func getTrending(type: TrendingType,
                      timeFrame: TrendingTimeFrame,
                      page: Int) async throws -> TrendingResponse
     
-    func getMovieDetails(accessToken: String,
-                         movieId: Int) async throws -> MovieDetail
+    func getMovieDetails(movieId: Int) async throws -> MovieDetail
 }
 
 struct TMDBService: TMDBServiceType {    
     let networkingManager: NetworkingManager
     
-    func getTrending(accessToken: String,
-                     type: TrendingType,
+    func getTrending(type: TrendingType,
                      timeFrame: TrendingTimeFrame = .week,
                      page: Int) async throws -> TrendingResponse {
         return try await networkingManager
@@ -41,8 +38,7 @@ struct TMDBService: TMDBServiceType {
                      decodingType: TrendingResponse.self)
     }
     
-    func getMovieDetails(accessToken: String,
-                         movieId: Int) async throws -> MovieDetail {
+    func getMovieDetails(movieId: Int) async throws -> MovieDetail {
         return try await networkingManager
             .request(endpoint: "/api/movies/details/\(movieId)",
                      decodingType: MovieDetail.self)

@@ -8,47 +8,39 @@
 import Foundation
 import Combine
 
-@MainActor
-class HomeViewModel: ObservableObject {
-    let userRepo: UserRepository
-    private let tmdbService: TMDBServiceType
-    private var cancellables: Set<AnyCancellable> = []
-    
-    private var page = 1
-    
-    @Published var trendingItems: [TrendingObject] = []
-    @Published var error: Error?
-    
-    init(userRepository: UserRepository,
-         tmdbService: TMDBServiceType = TMDBService(networkingManager: .current)) {
-        self.userRepo = userRepository
-        self.tmdbService = tmdbService
-    }
-    
-    func getUser() async throws {
-        try await self.userRepo.getUser()
-    }
-    
-    func logoutUser() {
-        self.userRepo.logoutUser()
-    }
-    
-    func getTrendingItems() async {
-        guard let accessToken = userRepo.accessToken else {
-            self.error = APIError.identityTokenMissing
-            return
+extension HomeView {
+    @MainActor
+    class ViewModel: ObservableObject {
+        enum State {
+            case loading
+            case success(trendingItems: [TrendingObject])
+            case error(error: Error)
         }
         
-        do {
-            let trendingResponse = try await self.tmdbService
-                .getTrending(accessToken: accessToken,
-                             type: .movie,
-                             timeFrame: .week,
-                             page: self.page)
-            self.trendingItems = trendingResponse.results
-        } catch {
-            self.error = error
+        private let tmdbService: TMDBServiceType
+        private var cancellables: Set<AnyCancellable> = []
+        
+        private var page = 1 //TODO: handle pagination
+        
+        @Published var state: State = .loading
+        @Published var trendingItems: [TrendingObject] = []
+        
+        init(tmdbService: TMDBServiceType = TMDBService(networkingManager: .current)) {
+            self.tmdbService = tmdbService
         }
         
+        func getTrendingItems() async {
+            self.state = .loading
+            do {
+                let trendingResponse = try await self.tmdbService
+                    .getTrending(type: .movie,
+                                 timeFrame: .week,
+                                 page: self.page)
+                state = .success(trendingItems: trendingResponse.results)
+            } catch {
+                state = .error(error: error)
+            }
+            
+        }
     }
 }

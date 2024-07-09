@@ -9,23 +9,66 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @StateObject var profileViewModel: ProfileViewModel
+    @StateObject var viewModel: ViewModel
     
-    init(profileViewModel: ProfileViewModel) {
-        _profileViewModel = StateObject(wrappedValue: profileViewModel)
+    init(viewModel: ViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     var body: some View {
+        NavigationStack {
+            content
+                .navigationTitle("Profile")
+        }
+        .onAppear {
+            Task {
+                await viewModel.getUser()
+            }
+        }
         
-        Text(self.profileViewModel.name)
-        Button(action: {
-            profileViewModel.logoutUser()
-        }, label: {
-            Text("Logout")
-        })
+    }
+    
+    @ViewBuilder
+    var content: some View {
+        switch viewModel.state {
+        case .loading:
+            loadingView
+        case .success:
+            successView
+        case .error(let error):
+            errorView(error: error)
+        }
+    }
+    
+    private var loadingView: some View {
+        ProgressView()
+    }
+    
+    private var successView: some View {
+        VStack {
+            Text(viewModel.name)
+            Button(action: {
+                viewModel.logoutUser()
+            }, label: {
+                Text("Logout")
+            })
+        }
+    }
+    
+    private func errorView(error: Error) -> some View {
+        VStack {
+            Text(error.localizedDescription)
+            Button(action: {
+                Task {
+                    await viewModel.getUser()
+                }
+            }, label: {
+                Text("Retry")
+            })
+        }
     }
 }
 
 #Preview {
-    ProfileView(profileViewModel: ProfileViewModel(userRepo: UserRepository()))
+    ProfileView(viewModel: ProfileView.ViewModel(userRepo: UserRepository()))
 }

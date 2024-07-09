@@ -8,18 +8,17 @@
 import SwiftUI
 
 struct DetailView: View {
-    
-    @StateObject var detailViewModel: DetailViewModel
+    @StateObject var viewModel: ViewModel
     @State private var showAddRating = false
     
-    init(detailViewModel: DetailViewModel) {
-        _detailViewModel = StateObject(wrappedValue: detailViewModel)
+    init(viewModel: ViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
-                AsyncImage(url: try? detailViewModel.movieDetails?.posterPath?.asURL()) { image in
+                AsyncImage(url: try? viewModel.movieDetails?.posterPath?.asURL()) { image in
                     image
                         .resizable()
                         .scaledToFit()
@@ -27,15 +26,15 @@ struct DetailView: View {
                     ProgressView()
                 }
                 .frame(height: 200)
-                Text(detailViewModel.movieDetails?.overview ?? "")
+                Text(viewModel.movieDetails?.overview ?? "")
                     .font(.subheadline)
             }
             
-            Text("Average: " + detailViewModel.averageRating)
+            Text("Average: " + viewModel.averageRating)
                 .font(.title)
-            Text("Total Ratings: " + detailViewModel.totalRatings)
+            Text("Total Ratings: " + viewModel.totalRatings)
                 .font(.subheadline)
-            List(detailViewModel.movieRatings, id: \.id) { movieRating in
+            List(viewModel.movieRatings, id: \.id) { movieRating in
                 VStack {
                     Text("\(movieRating.rating)")
                     Text(movieRating.user.firstName ?? "...")
@@ -45,7 +44,7 @@ struct DetailView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle(detailViewModel.movieDetails?.title ?? "")
+        .navigationTitle(viewModel.movieDetails?.title ?? "")
         .toolbar {
             ToolbarItem {
                 Button(action: {
@@ -58,22 +57,20 @@ struct DetailView: View {
         }
         .onAppear {
             Task {
-                await [detailViewModel.getMovieRatings(), detailViewModel.getMovieDetails()]
+                await [viewModel.getMovieRatings(), viewModel.getMovieDetails()]
             }
         }
         .sheet(isPresented: $showAddRating, onDismiss: {
             Task {
-                await detailViewModel.getMovieRatings()
+                await viewModel.getMovieRatings()
             }
         }, content: {
-            AddRatingView(viewModel: AddRatingViewModel(movieId: detailViewModel.itemId,
-                                                        userRepo: detailViewModel.userRepo))
+            AddRatingView(viewModel: AddRatingView.ViewModel(movieId: viewModel.itemId))
         })
     }
 }
 
 #Preview {
-    DetailView(detailViewModel: DetailViewModel(itemId: 786892,
-                                                userRepo: UserRepository(),
-                                                movieRatingsService: MovieRatingsService(networkingManager: .current)))
+    DetailView(viewModel: DetailView.ViewModel(itemId: 786892,
+                                               movieRatingsService: MovieRatingsService(networkingManager: .current)))
 }

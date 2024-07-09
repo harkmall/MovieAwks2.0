@@ -9,8 +9,8 @@ import Foundation
 import Alamofire
 import KeychainSwift
 
+@MainActor
 class UserRepository: ObservableObject {
-
     @Published var accessToken: String?
     @Published var user: User?
     
@@ -30,11 +30,8 @@ class UserRepository: ObservableObject {
 // MARK: - User Actions
 extension UserRepository {
     func getUser() async throws {
-        guard let accessToken = accessToken else { throw APIError.unauthorized }
-        let user = try await userService.getUser(accessToken: accessToken)
-        await MainActor.run {
-            self.user = user
-        }
+        let user = try await userService.getUser()
+        self.user = user
     }
     
     func logoutUser() {
@@ -53,11 +50,9 @@ extension UserRepository {
                                                               appleIdentityToken: identityToken)
         
         guard let accessToken = userResponse.accessToken else { throw UserRepository.Error.accessTokenNotInResponse }
-        await keychain.set(accessToken, forKey: MovieAwksApp.accessTokenKey)
-        await MainActor.run {
-            self.user = userResponse.user
-            self.accessToken = accessToken
-        }
+        keychain.set(accessToken, forKey: MovieAwksApp.accessTokenKey)
+        self.user = userResponse.user
+        self.accessToken = accessToken
     }
 }
 

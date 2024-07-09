@@ -9,13 +9,13 @@ import Foundation
 import Alamofire
 
 protocol UserServiceType: Service {
-    func getUser(accessToken: String) async throws -> User
+    func getUser() async throws -> User
 }
 
 struct UserService: UserServiceType {
     let networkingManager: NetworkingManager
         
-    func getUser(accessToken: String) async throws -> User {
+    func getUser() async throws -> User {
         return try await networkingManager
             .request(endpoint: "/api/users/me", decodingType: UserResponse.self)
             .user

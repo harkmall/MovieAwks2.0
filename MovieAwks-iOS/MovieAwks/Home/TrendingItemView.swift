@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct TrendingItemView: View {
-    
     let trendingItem: TrendingObject
     
     var body: some View {

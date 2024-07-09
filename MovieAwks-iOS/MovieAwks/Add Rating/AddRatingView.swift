@@ -8,31 +8,16 @@
 import SwiftUI
 
 struct AddRatingView: View {
-    
     @Environment(\.dismiss) var dismiss
-    @StateObject var addRatingViewModel: AddRatingViewModel
+    @StateObject var viewModel: ViewModel
     
-    init(viewModel: AddRatingViewModel) {
-        _addRatingViewModel = StateObject(wrappedValue: viewModel)
+    init(viewModel: ViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     var body: some View {
         NavigationStack {
-            VStack {
-                Text(addRatingViewModel.formattedRating)
-                Slider(value: $addRatingViewModel.rating, in: 0...10, step: 1)
-                TextField("Comment", text: $addRatingViewModel.comment, axis: .vertical)
-                    .lineLimit(5)
-                Button(action: {
-                    Task {
-                        await addRatingViewModel.saveRating()
-                    }
-                }, label: {
-                    Text("Save")
-                })
-                    
-            }
-            .padding()
+            content
             .navigationTitle("Add Rating")
             .toolbar {
                 Button(action: {
@@ -41,15 +26,62 @@ struct AddRatingView: View {
                     Text("Done")
                 })
             }
-            .onReceive(addRatingViewModel.$commentSaved, perform: { commentSaved in
+            .onReceive(viewModel.$commentSaved, perform: { commentSaved in
                 if commentSaved {
                     dismiss()
                 }
             })
         }
     }
+
+    @ViewBuilder
+    private var content: some View {
+        switch viewModel.state {
+        case .idle:
+            idleView
+        case .loading:
+            loadingView
+        case .error(let error):
+            errorView(error: error)
+        }
+    }
+    
+    private var loadingView: some View {
+        ProgressView()
+    }
+    
+    private var idleView: some View {
+        VStack {
+            Text(viewModel.formattedRating)
+            Slider(value: $viewModel.rating, in: 0...10, step: 1)
+            TextField("Comment", text: $viewModel.comment, axis: .vertical)
+                .lineLimit(5)
+            Button(action: {
+                Task {
+                    await viewModel.saveRating()
+                }
+            }, label: {
+                Text("Save")
+            })
+                
+        }
+        .padding()
+    }
+    
+    private func errorView(error: Error) -> some View {
+        VStack {
+            Text(error.localizedDescription)
+            Button(action: {
+                Task {
+                    await viewModel.saveRating()
+                }
+            }, label: {
+                Text("Retry")
+            })
+        }
+    }
 }
 
 #Preview {
-    AddRatingView(viewModel: AddRatingViewModel(movieId: 0, userRepo: UserRepository()))
+    AddRatingView(viewModel: AddRatingView.ViewModel(movieId: 0))
 }
