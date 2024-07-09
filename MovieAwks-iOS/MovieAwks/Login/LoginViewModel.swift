@@ -8,6 +8,7 @@
 import Foundation
 import AuthenticationServices
 
+@MainActor
 class LoginViewModel: ObservableObject {
     let userRepo: UserRepository
     
@@ -20,18 +21,14 @@ class LoginViewModel: ObservableObject {
     }
     
     func handle(appleAuthResult: Result<ASAuthorization, Error>) async {
-        await MainActor.run {
-            self.isLoading = true
-        }
+        self.isLoading = true
         switch appleAuthResult {
         case .success(let authResults):
             await saveUserToDB(with: authResults)
         case .failure(let error):
-            await MainActor.run {
-                self.error = error
-            }
+            self.error = error
         }
-
+        
     }
     
     private func saveUserToDB(with authResults: ASAuthorization) async {
@@ -47,14 +44,10 @@ class LoginViewModel: ObservableObject {
                                                   firstName: credentials.fullName?.givenName,
                                                   lastName: credentials.fullName?.familyName)
             try await userRepo.getUser()
-            await MainActor.run {
-                self.isLoading = false
-            }
+            self.isLoading = false
         } catch {
-            await MainActor.run {
-                self.isLoading = false
-                self.error = error
-            }
+            self.isLoading = false
+            self.error = error
         }
     }
 }

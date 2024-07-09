@@ -8,21 +8,22 @@
 import Foundation
 import Combine
 
+@MainActor
 class AddRatingViewModel: ObservableObject {
     private let movieId: Int
     private let userRepo: UserRepository
     private let movieRatingsService: MovieRatingsServiceType
     private var cancellables: Set<AnyCancellable> = []
-
+    
     @Published var comment: String = ""
     @Published var rating: Float = 0
     @Published var formattedRating: String = ""
     @Published var commentSaved = false
     @Published var error: Error?
     
-    init(movieId: Int,          
+    init(movieId: Int,
          userRepo: UserRepository,
-         movieRatingsService: MovieRatingsServiceType = MovieRatingsService(environment: .current)) {
+         movieRatingsService: MovieRatingsServiceType = MovieRatingsService(networkingManager: .current)) {
         self.movieId = movieId
         self.movieRatingsService = movieRatingsService
         self.userRepo = userRepo
@@ -35,23 +36,17 @@ class AddRatingViewModel: ObservableObject {
     
     func saveRating() async {
         guard let accessToken = userRepo.accessToken else {
-            await MainActor.run {
-                error = APIError.identityTokenMissing
-            }
+            error = APIError.identityTokenMissing
             return
         }
         do {
             try await movieRatingsService.saveMovieRating(accessToken: accessToken,
-                                                               with: MovieRatingRequestBody(movieId: movieId,
-                                                                                            rating: rating,
-                                                                                            comment: comment.isEmpty ? nil : comment))
-            await MainActor.run {
-                commentSaved = true
-            }
+                                                          with: MovieRatingRequestBody(movieId: movieId,
+                                                                                       rating: rating,
+                                                                                       comment: comment.isEmpty ? nil : comment))
+            commentSaved = true
         } catch {
-            await MainActor.run {
-                self.error = error
-            }
+            self.error = error
         }
     }
 }

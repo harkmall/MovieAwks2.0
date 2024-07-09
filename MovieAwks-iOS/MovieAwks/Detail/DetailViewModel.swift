@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 class DetailViewModel: ObservableObject {
     let userRepo: UserRepository
     private let tmdbService: TMDBServiceType
@@ -21,8 +22,8 @@ class DetailViewModel: ObservableObject {
     
     init(itemId: Int,
          userRepo: UserRepository,
-         tmdbService: TMDBServiceType = TMDBService(environment: .current),
-         movieRatingsService: MovieRatingsServiceType = MovieRatingsService(environment: .current)) {
+         tmdbService: TMDBServiceType = TMDBService(networkingManager: .current),
+         movieRatingsService: MovieRatingsServiceType = MovieRatingsService(networkingManager: .current)) {
         self.userRepo = userRepo
         self.tmdbService = tmdbService
         self.movieRatingsService = movieRatingsService
@@ -31,9 +32,7 @@ class DetailViewModel: ObservableObject {
     
     func getMovieDetails() async {
         guard let accessToken = userRepo.accessToken else {
-            await MainActor.run {
-                self.error = APIError.identityTokenMissing
-            }
+            self.error = APIError.identityTokenMissing
             return
         }
         
@@ -41,21 +40,16 @@ class DetailViewModel: ObservableObject {
             let movieDetails = try await self.tmdbService
                 .getMovieDetails(accessToken: accessToken,
                                  movieId: itemId)
-            await MainActor.run {
-                self.movieDetails = movieDetails
-            }
+            self.movieDetails = movieDetails
         } catch {
-            await MainActor.run {
-                self.error = error
-            }
+            self.error = error
+            
         }
     }
     
     func getMovieRatings() async {
         guard let accessToken = userRepo.accessToken else {
-            await MainActor.run {
-                self.error = APIError.identityTokenMissing
-            }
+            self.error = APIError.identityTokenMissing
             return
         }
         
@@ -63,15 +57,11 @@ class DetailViewModel: ObservableObject {
             let movieRatingsResponse = try await self.movieRatingsService
                 .getRatings(accessToken: accessToken,
                             forMovie: itemId)
-            await MainActor.run {
-                self.movieRatings = movieRatingsResponse.ratings
-                self.averageRating = movieRatingsResponse.averageRating.formatted()
-                self.totalRatings = movieRatingsResponse.totalRatings.formatted(.number)
-            }
+            self.movieRatings = movieRatingsResponse.ratings
+            self.averageRating = movieRatingsResponse.averageRating.formatted()
+            self.totalRatings = movieRatingsResponse.totalRatings.formatted(.number)
         } catch {
-            await MainActor.run {
-                self.error = error
-            }
+            self.error = error
         }
     }
 }

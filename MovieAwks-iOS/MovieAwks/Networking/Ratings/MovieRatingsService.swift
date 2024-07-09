@@ -16,35 +16,22 @@ protocol MovieRatingsServiceType: Service {
                          with body: MovieRatingRequestBody) async throws
 }
 
-struct MovieRatingsService: MovieRatingsServiceType {
-    let environment: Networking.Environment
-    let responseJSONDecoder: JSONDecoder
-
-    init(environment: Networking.Environment = .current) {
-        self.environment = environment
-        
-        self.responseJSONDecoder = JSONDecoder()
-        self.responseJSONDecoder.dateDecodingStrategy = .secondsSince1970
-    }
+struct MovieRatingsService: MovieRatingsServiceType {    
+    let networkingManager: NetworkingManager
     
     func getRatings(accessToken: String,
                     forMovie id: Int) async throws -> MovieRatingsResponse {
-        return try await AF
-            .request(environment.baseURL + "/api/movies/ratings/\(id)",
-                     headers: [.authorization(bearerToken: accessToken)])
-            .serializingDecodable(MovieRatingsResponse.self, 
-                                  decoder: self.responseJSONDecoder)
-            .value
+        return try await networkingManager
+            .request(endpoint: "/api/movies/ratings/\(id)", decodingType: MovieRatingsResponse.self)
     }
     
     func saveMovieRating(accessToken: String,
                          with body: MovieRatingRequestBody) async throws {
-        _ = try await AF
-            .request(environment.baseURL + "/api/movies/ratings",
+        
+        _ = try await networkingManager
+            .request(endpoint: "/api/movies/ratings",
                      method: .post,
                      parameters: body,
-                     headers: [.authorization(bearerToken: accessToken)])
-            .serializingDecodable(Empty.self)
-            .value
+                     decodingType: Empty.self)
     }
 }

@@ -13,19 +13,11 @@ protocol UserServiceType: Service {
 }
 
 struct UserService: UserServiceType {
-    let environment: Networking.Environment
-    
-    init(environment: Networking.Environment = .development) {
-        self.environment = environment
-    }
-    
+    let networkingManager: NetworkingManager
+        
     func getUser(accessToken: String) async throws -> User {
-        return try await AF
-            .request(environment.baseURL + "/api/users/me",
-                     headers: [.authorization(bearerToken: accessToken)])
-            .serializingDecodable(UserResponse.self)
-            .value
+        return try await networkingManager
+            .request(endpoint: "/api/users/me", decodingType: UserResponse.self)
             .user
     }
-    
 }

@@ -75,5 +75,5 @@ struct DetailView: View {
 #Preview {
     DetailView(detailViewModel: DetailViewModel(itemId: 786892,
                                                 userRepo: UserRepository(),
-                                                movieRatingsService: MovieRatingsService(environment: .current)))
+                                                movieRatingsService: MovieRatingsService(networkingManager: .current)))
 }

@@ -15,7 +15,7 @@
 		A73FA8122C220727008262C3 /* MovieAwksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FA8112C220727008262C3 /* MovieAwksUITests.swift */; };
 		A73FA8142C220727008262C3 /* MovieAwksUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73FA8132C220727008262C3 /* MovieAwksUITestsLaunchTests.swift */; };
 		A7737B552C29C917004944FC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A7737B542C29C917004944FC /* Alamofire */; };
-		A7737B582C29C9E7004944FC /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B572C29C9E7004944FC /* Networking.swift */; };
+		A7737B582C29C9E7004944FC /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B572C29C9E7004944FC /* NetworkManager.swift */; };
 		A7737B5B2C29CA92004944FC /* SIWAAuthRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B5A2C29CA92004944FC /* SIWAAuthRequestBody.swift */; };
 		A7737B5D2C29CAA2004944FC /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B5C2C29CAA2004944FC /* UserResponse.swift */; };
 		A7737B5F2C29CAA9004944FC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7737B5E2C29CAA9004944FC /* User.swift */; };
@@ -43,6 +43,7 @@
 		A7A72A3E2C38694D00673DD5 /* AddRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A3D2C38694D00673DD5 /* AddRatingView.swift */; };
 		A7A72A402C3C30FF00673DD5 /* AddRatingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A3F2C3C30FF00673DD5 /* AddRatingViewModel.swift */; };
 		A7A72A422C3C3AEA00673DD5 /* MovieRatingRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A412C3C3AEA00673DD5 /* MovieRatingRequestBody.swift */; };
+		A7A72A4C2C3C707300673DD5 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A4B2C3C707300673DD5 /* Keychain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +75,7 @@
 		A73FA80D2C220727008262C3 /* MovieAwksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieAwksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A73FA8112C220727008262C3 /* MovieAwksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAwksUITests.swift; sourceTree = "<group>"; };
 		A73FA8132C220727008262C3 /* MovieAwksUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAwksUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		A7737B572C29C9E7004944FC /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		A7737B572C29C9E7004944FC /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A7737B5A2C29CA92004944FC /* SIWAAuthRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIWAAuthRequestBody.swift; sourceTree = "<group>"; };
 		A7737B5C2C29CAA2004944FC /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		A7737B5E2C29CAA9004944FC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -101,6 +102,7 @@
 		A7A72A3D2C38694D00673DD5 /* AddRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRatingView.swift; sourceTree = "<group>"; };
 		A7A72A3F2C3C30FF00673DD5 /* AddRatingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRatingViewModel.swift; sourceTree = "<group>"; };
 		A7A72A412C3C3AEA00673DD5 /* MovieRatingRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRatingRequestBody.swift; sourceTree = "<group>"; };
+		A7A72A4B2C3C707300673DD5 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				A73FA7F52C220726008262C3 /* MovieAwksApp.swift */,
+				A7A72A4B2C3C707300673DD5 /* Keychain.swift */,
 				A7737B562C29C944004944FC /* Networking */,
 				A7737B752C2B3EB9004944FC /* Home */,
 				A7A72A282C35A48D00673DD5 /* Detail */,
@@ -195,7 +198,7 @@
 		A7737B562C29C944004944FC /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				A7737B572C29C9E7004944FC /* Networking.swift */,
+				A7737B572C29C9E7004944FC /* NetworkManager.swift */,
 				A7737B602C29CADA004944FC /* APIError.swift */,
 				A7737B702C2B0CEE004944FC /* Service.swift */,
 				A7737B7B2C2DF131004944FC /* TMDB */,
@@ -473,7 +476,7 @@
 				A7737B7E2C2DF169004944FC /* TrendingResponse.swift in Sources */,
 				A7A72A2F2C35CFCA00673DD5 /* ProfileViewModel.swift in Sources */,
 				A7A72A392C38326C00673DD5 /* MovieRating.swift in Sources */,
-				A7737B582C29C9E7004944FC /* Networking.swift in Sources */,
+				A7737B582C29C9E7004944FC /* NetworkManager.swift in Sources */,
 				A7737B6E2C2B0B9F004944FC /* AuthService.swift in Sources */,
 				A7A72A312C35D3BA00673DD5 /* DetailViewModel.swift in Sources */,
 				A7737B5F2C29CAA9004944FC /* User.swift in Sources */,
@@ -493,6 +496,7 @@
 				A7A72A402C3C30FF00673DD5 /* AddRatingViewModel.swift in Sources */,
 				A7737B772C2DDAB9004944FC /* TMDBService.swift in Sources */,
 				A7737B6A2C2B0258004944FC /* UserRepository.swift in Sources */,
+				A7A72A4C2C3C707300673DD5 /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,5 +9,5 @@ import Foundation
 import Alamofire
 
 protocol Service {
-    var environment: Networking.Environment { get }
+    var networkingManager: NetworkingManager { get }
 }

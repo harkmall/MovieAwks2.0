@@ -28,38 +28,23 @@ protocol TMDBServiceType: Service {
                          movieId: Int) async throws -> MovieDetail
 }
 
-struct TMDBService: TMDBServiceType {
-    let environment: Networking.Environment
-    
-    let responseJSONDecoder: JSONDecoder
-    
-    init(environment: Networking.Environment) {
-        self.environment = environment
-        
-        self.responseJSONDecoder = JSONDecoder()
-        self.responseJSONDecoder.dateDecodingStrategy = .secondsSince1970
-    }
+struct TMDBService: TMDBServiceType {    
+    let networkingManager: NetworkingManager
     
     func getTrending(accessToken: String,
                      type: TrendingType,
                      timeFrame: TrendingTimeFrame = .week,
                      page: Int) async throws -> TrendingResponse {
-        return try await AF
-            .request(environment.baseURL + "/api/trending/\(type.rawValue)",
+        return try await networkingManager
+            .request(endpoint: "/api/trending/\(type.rawValue)",
                      parameters: ["time": timeFrame.rawValue, "page": "\(page)"],
-                     headers: [.authorization(bearerToken: accessToken)])
-            .serializingDecodable(TrendingResponse.self, 
-                                  decoder: self.responseJSONDecoder)
-            .value
+                     decodingType: TrendingResponse.self)
     }
     
     func getMovieDetails(accessToken: String,
                          movieId: Int) async throws -> MovieDetail {
-        return try await AF
-            .request(environment.baseURL + "/api/movies/details/\(movieId)",
-                     headers: [.authorization(bearerToken: accessToken)])
-            .serializingDecodable(MovieDetail.self,
-                                  decoder: self.responseJSONDecoder)
-            .value
+        return try await networkingManager
+            .request(endpoint: "/api/movies/details/\(movieId)",
+                     decodingType: MovieDetail.self)
     }
 }

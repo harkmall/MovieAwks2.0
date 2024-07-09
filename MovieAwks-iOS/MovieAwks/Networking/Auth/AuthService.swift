@@ -13,22 +13,19 @@ protocol AuthServiceType: Service {
 }
 
 struct AuthService: AuthServiceType {
-    let environment: Networking.Environment
+    let networkingManager: NetworkingManager
 
     func authWithSIWA(firstName: String?, lastName: String?, appleIdentityToken: Data?) async throws -> UserResponse {
         guard let appleIdentityToken = appleIdentityToken else { throw APIError.identityTokenMissing }
         guard let identityTokenString = String(data: appleIdentityToken, encoding: .utf8) else { throw APIError.unableToDecodeIdentityToken }
         
-        let request = AF
-            .request(environment.baseURL + "/api/auth/siwa",
+        return try await networkingManager
+            .request(needsAuth: false,
+                     endpoint: "/api/auth/siwa",
                      method: .post,
                      parameters: SIWAAuthRequestBody(firstName: firstName,
                                                      lastName: lastName,
                                                      appleIdentityToken: identityTokenString),
-                     encoder: JSONParameterEncoder.default)
-            .serializingDecodable(UserResponse.self)
-        
-        return try await request.value
+                     decodingType: UserResponse.self)
     }
-    
 }

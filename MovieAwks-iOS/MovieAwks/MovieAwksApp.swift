@@ -10,6 +10,8 @@ import SwiftUI
 @main
 struct MovieAwksApp: App {
     
+    static let accessTokenKey = "ACCESS_TOKEN"
+    
     @StateObject var userRepository = UserRepository()
     
     var body: some Scene {

@@ -17,13 +17,12 @@ class UserRepository: ObservableObject {
     private let userService: UserServiceType
     private let authService: AuthServiceType
     private let keychain = KeychainSwift()
-    private let accessTokenKey = "ACCESS_TOKEN"
     
-    init(userService: UserServiceType = UserService(environment: .current),
-         authService: AuthServiceType = AuthService(environment: .current)) {
+    init(userService: UserServiceType = UserService(networkingManager: .current),
+         authService: AuthServiceType = AuthService(networkingManager: .current)) {
         self.userService = userService
         self.authService = authService
-        self.accessToken = keychain.get(accessTokenKey)
+        self.accessToken = keychain.get(MovieAwksApp.accessTokenKey)
     }
     
 }
@@ -54,7 +53,7 @@ extension UserRepository {
                                                               appleIdentityToken: identityToken)
         
         guard let accessToken = userResponse.accessToken else { throw UserRepository.Error.accessTokenNotInResponse }
-        keychain.set(accessToken, forKey: accessTokenKey)
+        await keychain.set(accessToken, forKey: MovieAwksApp.accessTokenKey)
         await MainActor.run {
             self.user = userResponse.user
             self.accessToken = accessToken

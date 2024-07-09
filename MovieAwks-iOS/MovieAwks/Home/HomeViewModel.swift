@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 
+@MainActor
 class HomeViewModel: ObservableObject {
     let userRepo: UserRepository
     private let tmdbService: TMDBServiceType
@@ -15,20 +16,13 @@ class HomeViewModel: ObservableObject {
     
     private var page = 1
     
-    @Published var name: String = ""
     @Published var trendingItems: [TrendingObject] = []
     @Published var error: Error?
     
     init(userRepository: UserRepository,
-         tmdbService: TMDBServiceType = TMDBService(environment: .current)) {
+         tmdbService: TMDBServiceType = TMDBService(networkingManager: .current)) {
         self.userRepo = userRepository
         self.tmdbService = tmdbService
-        
-        userRepository.$user
-            .compactMap { "\($0?.firstName ?? "") \($0?.lastName ?? "")" }
-            .assign(to: \.name, on: self)
-            .store(in: &cancellables)
-        
     }
     
     func getUser() async throws {
@@ -41,9 +35,7 @@ class HomeViewModel: ObservableObject {
     
     func getTrendingItems() async {
         guard let accessToken = userRepo.accessToken else {
-            await MainActor.run {
-                self.error = APIError.identityTokenMissing
-            }
+            self.error = APIError.identityTokenMissing
             return
         }
         
@@ -53,13 +45,9 @@ class HomeViewModel: ObservableObject {
                              type: .movie,
                              timeFrame: .week,
                              page: self.page)
-            await MainActor.run {
-                self.trendingItems = trendingResponse.results
-            }
+            self.trendingItems = trendingResponse.results
         } catch {
-            await MainActor.run {
-                self.error = error
-            }
+            self.error = error
         }
         
     }
