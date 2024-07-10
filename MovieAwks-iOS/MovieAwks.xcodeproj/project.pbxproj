@@ -44,6 +44,7 @@
 		A7A72A402C3C30FF00673DD5 /* AddRatingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A3F2C3C30FF00673DD5 /* AddRatingViewModel.swift */; };
 		A7A72A422C3C3AEA00673DD5 /* MovieRatingRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A412C3C3AEA00673DD5 /* MovieRatingRequestBody.swift */; };
 		A7A72A4C2C3C707300673DD5 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A4B2C3C707300673DD5 /* Keychain.swift */; };
+		A7A72A4E2C3EF04D00673DD5 /* RatingEmojiRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A4D2C3EF04D00673DD5 /* RatingEmojiRepresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		A7A72A3F2C3C30FF00673DD5 /* AddRatingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRatingViewModel.swift; sourceTree = "<group>"; };
 		A7A72A412C3C3AEA00673DD5 /* MovieRatingRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRatingRequestBody.swift; sourceTree = "<group>"; };
 		A7A72A4B2C3C707300673DD5 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		A7A72A4D2C3EF04D00673DD5 /* RatingEmojiRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingEmojiRepresentable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 			children = (
 				A73FA7F52C220726008262C3 /* MovieAwksApp.swift */,
 				A7A72A4B2C3C707300673DD5 /* Keychain.swift */,
+				A7A72A4D2C3EF04D00673DD5 /* RatingEmojiRepresentable.swift */,
 				A7737B562C29C944004944FC /* Networking */,
 				A7737B752C2B3EB9004944FC /* Home */,
 				A7A72A282C35A48D00673DD5 /* Detail */,
@@ -492,6 +495,7 @@
 				A73FA7F62C220726008262C3 /* MovieAwksApp.swift in Sources */,
 				A7A72A3B2C385FB800673DD5 /* MovieDetail.swift in Sources */,
 				A7737B612C29CADA004944FC /* APIError.swift in Sources */,
+				A7A72A4E2C3EF04D00673DD5 /* RatingEmojiRepresentable.swift in Sources */,
 				A7A72A2A2C35A49F00673DD5 /* DetailView.swift in Sources */,
 				A7A72A402C3C30FF00673DD5 /* AddRatingViewModel.swift in Sources */,
 				A7737B772C2DDAB9004944FC /* TMDBService.swift in Sources */,

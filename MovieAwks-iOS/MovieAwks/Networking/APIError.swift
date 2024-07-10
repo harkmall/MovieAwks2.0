@@ -29,7 +29,7 @@ enum APIError: LocalizedError {
         case .unauthorized:
             return ""
         case .invalidResponse:
-            return ""
+            return "Invalid Response"
         case .httpError(statusCode: let statusCode):
             return "\(statusCode)"
         }

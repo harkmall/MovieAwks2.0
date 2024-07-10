@@ -12,6 +12,8 @@ final class MovieRating: Codable {
     let user: User
     let createdAt: Date?
     let movieId: Int
-    let rating: Float
+    let rating: Float?
     let comment: String?
 }
+
+extension MovieRating: RatingEmojiRepresentable { }

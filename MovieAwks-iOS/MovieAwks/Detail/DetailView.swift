@@ -16,35 +16,9 @@ struct DetailView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            VStack(alignment: .leading) {
-                AsyncImage(url: try? viewModel.movieDetails?.posterPath?.asURL()) { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                } placeholder: {
-                    ProgressView()
-                }
-                .frame(height: 200)
-                Text(viewModel.movieDetails?.overview ?? "")
-                    .font(.subheadline)
-            }
-            
-            Text("Average: " + viewModel.averageRating)
-                .font(.title)
-            Text("Total Ratings: " + viewModel.totalRatings)
-                .font(.subheadline)
-            List(viewModel.movieRatings, id: \.id) { movieRating in
-                VStack {
-                    Text("\(movieRating.rating)")
-                    Text(movieRating.user.firstName ?? "...")
-                    Text(movieRating.comment ?? "-")
-                    Text(movieRating.createdAt?.formatted() ?? "---")
-                }
-            }
+        VStack {
+            content
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle(viewModel.movieDetails?.title ?? "")
         .toolbar {
             ToolbarItem {
                 Button(action: {
@@ -68,9 +42,109 @@ struct DetailView: View {
             AddRatingView(viewModel: AddRatingView.ViewModel(movieId: viewModel.itemId))
         })
     }
+    
+    @ViewBuilder
+    private var content: some View {
+        switch viewModel.state {
+        case (.error(let detailError), .error(error: let ratingsError)):
+            errorView(error: detailError, ratingsError) {
+                Task { await [viewModel.getMovieRatings(), viewModel.getMovieDetails()] }
+            }
+        case (.loading, .loading):
+            loadingView
+        default:
+            detailContent
+            ratingsContent
+        }
+    }
+    
+    @ViewBuilder
+    private var detailContent: some View {
+        switch viewModel.state.0 {
+        case .loading:
+            loadingView
+        case .error(let error):
+            errorView(error: error) { await viewModel.getMovieDetails() }
+        case .success(let movieDetail):
+            movieDetailsView(with: movieDetail)
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationTitle(movieDetail.title ?? "")
+        }
+    }
+    
+    private var loadingView: some View {
+        ProgressView()
+    }
+    
+    private func errorView(error: Error..., retryTask: @Sendable @escaping () async -> Void ) -> some View {
+        VStack {
+            Text(error.reduce("", { $0.appending($1.localizedDescription) + "\n" }))
+            Button(action: {
+                Task(operation: retryTask)
+            }, label: {
+                Text("Retry")
+            })
+        }
+    }
+    
+    private func movieDetailsView(with details: MovieDetail) -> some View {
+        VStack(alignment: .leading) {
+            AsyncImage(url: try? details.posterPath?.asURL()) { image in
+                image
+                    .resizable()
+                    .scaledToFit()
+            } placeholder: {
+                ProgressView()
+            }
+            .frame(height: 200)
+            Text(details.overview ?? "")
+                .font(.subheadline)
+        }
+        .padding()
+    }
+    
+    @ViewBuilder
+    private var ratingsContent: some View {
+        switch viewModel.state.1 {
+        case .loading:
+            loadingView
+        case .error(let error):
+            errorView(error: error) { await viewModel.getMovieRatings() }
+        case .success(let averageRating, let totalRatings, let ratings):
+            ratingsView(with: averageRating, totalRatings: totalRatings, ratings: ratings)
+        }
+    }
+    
+    private func ratingsView(with averageRating: String, totalRatings: String, ratings: [MovieRating] ) -> some View {
+        VStack {
+            Text(averageRating)
+                .font(.title)
+            Text("Total Ratings: " + totalRatings)
+                .font(.subheadline)
+            List(ratings, id: \.id) { movieRating in
+                VStack(alignment: .leading) {
+                    HStack{
+                        Text(movieRating.emojiRating)
+                        Spacer()
+                        if let createdAt = movieRating.createdAt?.formatted(date: .abbreviated, time: .omitted) {
+                            Text(createdAt)
+                                .font(.caption2)
+                        }
+                    }
+                    if let firstName = movieRating.user.firstName {
+                        Text(firstName)
+                    }
+                    if let comment = movieRating.comment {
+                        Text(comment)
+                    }
+                }
+            }
+        }
+    }
 }
 
 #Preview {
     DetailView(viewModel: DetailView.ViewModel(itemId: 786892,
                                                movieRatingsService: MovieRatingsService(networkingManager: .current)))
+    .environmentObject(UserRepository())
 }

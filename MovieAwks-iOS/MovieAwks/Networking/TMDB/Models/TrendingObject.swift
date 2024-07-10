@@ -29,4 +29,7 @@ struct TrendingObject: Codable {
     let voteAverage: Float
     let voteCount: Int
     let originCountry: [String]?
+    let rating: Float?
 }
+
+extension TrendingObject: RatingEmojiRepresentable { }

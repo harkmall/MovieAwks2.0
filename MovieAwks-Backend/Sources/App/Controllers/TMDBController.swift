@@ -7,6 +7,7 @@
 
 import Foundation
 import Vapor
+import Fluent
 
 struct TMDBController {
     
@@ -33,6 +34,11 @@ struct TMDBController {
             .decode(TrendingResponse.self)
         
         for index in trendingResponse.results.indices {
+            let currentId = trendingResponse.results[index].id
+            let averageRating = try await MovieRating.query(on: req.db)
+                .filter(\.$movieId == currentId)
+                .average(\.$rating)
+            trendingResponse.results[index].rating = averageRating
             trendingResponse.results[index].buildImageUrls(with: configuration)
         }
         

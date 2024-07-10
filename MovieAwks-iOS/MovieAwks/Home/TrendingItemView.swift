@@ -11,7 +11,7 @@ struct TrendingItemView: View {
     let trendingItem: TrendingObject
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
 //            GeometryReader { geometry in
 //                AsyncImage(url: try? trendingItem.backdropPath?.asURL()) { image in
 //                    image
@@ -34,8 +34,8 @@ struct TrendingItemView: View {
                     ProgressView()
                 }
                 .frame(height: 200)
-                Text(trendingItem.overview ?? "")
-                    .font(.subheadline)
+                Text(trendingItem.emojiRating)
+                    .font(.largeTitle)
             }
 //            .offset(y: -200)
 //            .padding(.bottom, -200)
@@ -60,7 +60,8 @@ struct TrendingItemView: View {
                                                   releaseDate: .init(timeIntervalSince1970: 1705899600),
                                                   voteAverage: 7.713,
                                                   voteCount: 1594,
-                                                  originCountry: nil))
+                                                  originCountry: nil,
+                                                  rating: 5.2))
 }
 
 

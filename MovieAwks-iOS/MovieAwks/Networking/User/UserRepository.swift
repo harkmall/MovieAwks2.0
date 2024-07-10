@@ -50,7 +50,8 @@ extension UserRepository {
                                                               appleIdentityToken: identityToken)
         
         guard let accessToken = userResponse.accessToken else { throw UserRepository.Error.accessTokenNotInResponse }
-        keychain.set(accessToken, forKey: MovieAwksApp.accessTokenKey)
+        keychain.set(accessToken, 
+                     forKey: MovieAwksApp.accessTokenKey)
         self.user = userResponse.user
         self.accessToken = accessToken
     }

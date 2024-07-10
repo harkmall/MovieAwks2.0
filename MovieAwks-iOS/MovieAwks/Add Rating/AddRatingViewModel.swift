@@ -26,7 +26,6 @@ extension AddRatingView {
         @Published var rating: Float = 0
         @Published private(set) var formattedRating: String = ""
         @Published private(set) var commentSaved = false
-        @Published private(set) var error: Error?
         
         init(movieId: Int,
              movieRatingsService: MovieRatingsServiceType = MovieRatingsService(networkingManager: .current)) {
@@ -34,7 +33,7 @@ extension AddRatingView {
             self.movieRatingsService = movieRatingsService
             
             $rating
-                .map { $0.formatted() }
+                .map { $0.emojiRating }
                 .assign(to: \.formattedRating, on: self)
                 .store(in: &cancellables)
         }

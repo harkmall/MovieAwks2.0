@@ -17,7 +17,8 @@ struct UserService: UserServiceType {
         
     func getUser() async throws -> User {
         return try await networkingManager
-            .request(endpoint: "/api/users/me", decodingType: UserResponse.self)
+            .request(endpoint: "/api/users/me", 
+                     decodingType: UserResponse.self)
             .user
     }
 }
