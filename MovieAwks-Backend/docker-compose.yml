@@ -31,8 +31,10 @@ services:
     image: movie-awks--backend:latest
     build:
       context: .
-    environment:
-      <<: *shared_environment
+    # environment:
+    #   <<: *shared_environment
+    env_file:
+      - ../stack.env
     depends_on:
       - db
     ports:
@@ -43,8 +45,10 @@ services:
     image: movie-awks--backend:latest
     build:
       context: .
-    environment:
-      <<: *shared_environment
+    # environment:
+    #   <<: *shared_environment
+    env_file:
+      - ../stack.env
     depends_on:
       - db
     command: ["migrate", "--yes"]
@@ -54,8 +58,10 @@ services:
     image: movie-awks--backend:latest
     build:
       context: .
-    environment:
-      <<: *shared_environment
+    # environment:
+    #   <<: *shared_environment
+    env_file:
+      - ../stack.env
     depends_on:
       - db
     command: ["migrate", "--revert", "--yes"]
@@ -65,11 +71,13 @@ services:
     image: postgres:16-alpine
     volumes:
       - db_data:/var/lib/postgresql/data/pgdata
-    environment:
-      PGDATA: /var/lib/postgresql/data/pgdata
-      POSTGRES_USER: vapor_username
-      POSTGRES_PASSWORD: vapor_password
-      POSTGRES_DB: vapor_database
+    # environment:
+    #   PGDATA: /var/lib/postgresql/data/pgdata
+    #   POSTGRES_USER: vapor_username
+    #   POSTGRES_PASSWORD: vapor_password
+    #   POSTGRES_DB: vapor_database
+    env_file:
+      - ../stack.env
     expose:
       - "5432" 
     # ports:
