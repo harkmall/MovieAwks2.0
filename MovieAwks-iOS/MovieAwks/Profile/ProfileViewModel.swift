@@ -28,7 +28,7 @@ extension ProfileView {
             self.userRepo = userRepo
             
             userRepo.$user
-                .compactMap { "\($0?.firstName ?? "") \($0?.lastName ?? "")" }
+                .compactMap { $0?.fullName }
                 .assign(to: \.name, on: self)
                 .store(in: &cancellables)
         }

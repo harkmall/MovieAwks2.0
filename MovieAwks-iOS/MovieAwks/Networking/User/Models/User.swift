@@ -12,4 +12,9 @@ struct User: Codable {
     let email: String
     let firstName: String?
     let lastName: String?
+    
+    var fullName: String? {
+        if firstName == nil && lastName == nil { return nil }
+        return [firstName, lastName].compactMap { $0 }.joined(separator: " ")
+    }
 }

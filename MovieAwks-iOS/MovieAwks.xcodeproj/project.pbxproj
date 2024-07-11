@@ -45,6 +45,7 @@
 		A7A72A422C3C3AEA00673DD5 /* MovieRatingRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A412C3C3AEA00673DD5 /* MovieRatingRequestBody.swift */; };
 		A7A72A4C2C3C707300673DD5 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A4B2C3C707300673DD5 /* Keychain.swift */; };
 		A7A72A4E2C3EF04D00673DD5 /* RatingEmojiRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A4D2C3EF04D00673DD5 /* RatingEmojiRepresentable.swift */; };
+		A7A72A502C401B2D00673DD5 /* RatingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A4F2C401B2D00673DD5 /* RatingItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,7 @@
 		A7A72A412C3C3AEA00673DD5 /* MovieRatingRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRatingRequestBody.swift; sourceTree = "<group>"; };
 		A7A72A4B2C3C707300673DD5 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		A7A72A4D2C3EF04D00673DD5 /* RatingEmojiRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingEmojiRepresentable.swift; sourceTree = "<group>"; };
+		A7A72A4F2C401B2D00673DD5 /* RatingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,6 +293,7 @@
 			children = (
 				A7A72A292C35A49F00673DD5 /* DetailView.swift */,
 				A7A72A302C35D3BA00673DD5 /* DetailViewModel.swift */,
+				A7A72A4F2C401B2D00673DD5 /* RatingItemView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				A7A72A402C3C30FF00673DD5 /* AddRatingViewModel.swift in Sources */,
 				A7737B772C2DDAB9004944FC /* TMDBService.swift in Sources */,
 				A7737B6A2C2B0258004944FC /* UserRepository.swift in Sources */,
+				A7A72A502C401B2D00673DD5 /* RatingItemView.swift in Sources */,
 				A7A72A4C2C3C707300673DD5 /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

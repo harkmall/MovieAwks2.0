@@ -26,7 +26,6 @@ struct DetailView: View {
                 }, label: {
                     Image(systemName: "plus.square")
                 })
-                
             }
         }
         .onAppear {
@@ -122,22 +121,7 @@ struct DetailView: View {
             Text("Total Ratings: " + totalRatings)
                 .font(.subheadline)
             List(ratings, id: \.id) { movieRating in
-                VStack(alignment: .leading) {
-                    HStack{
-                        Text(movieRating.emojiRating)
-                        Spacer()
-                        if let createdAt = movieRating.createdAt?.formatted(date: .abbreviated, time: .omitted) {
-                            Text(createdAt)
-                                .font(.caption2)
-                        }
-                    }
-                    if let firstName = movieRating.user.firstName {
-                        Text(firstName)
-                    }
-                    if let comment = movieRating.comment {
-                        Text(comment)
-                    }
-                }
+                RatingItemView(movieRating: movieRating)
             }
         }
     }
