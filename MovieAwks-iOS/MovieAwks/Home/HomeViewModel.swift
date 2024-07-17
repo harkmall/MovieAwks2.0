@@ -18,7 +18,6 @@ extension HomeView {
         }
         
         private let tmdbService: TMDBServiceType
-        private var cancellables: Set<AnyCancellable> = []
         
         private var page = 1 //TODO: handle pagination
         
@@ -29,8 +28,10 @@ extension HomeView {
             self.tmdbService = tmdbService
         }
         
-        func getTrendingItems() async {
-            self.state = .loading
+        func getTrendingItems(reload: Bool = false) async {
+            if !reload {
+                self.state = .loading
+            }
             do {
                 let trendingResponse = try await self.tmdbService
                     .getTrending(type: .movie,

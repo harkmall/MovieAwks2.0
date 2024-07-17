@@ -24,6 +24,8 @@ protocol TMDBServiceType: Service {
                      page: Int) async throws -> TrendingResponse
     
     func getMovieDetails(movieId: Int) async throws -> MovieDetail
+    
+    func searchForMovie(query: String) async throws -> TrendingResponse
 }
 
 struct TMDBService: TMDBServiceType {    
@@ -42,5 +44,12 @@ struct TMDBService: TMDBServiceType {
         return try await networkingManager
             .request(endpoint: "/api/movies/details/\(movieId)",
                      decodingType: MovieDetail.self)
+    }
+    
+    func searchForMovie(query: String) async throws -> TrendingResponse {
+        return try await networkingManager
+            .request(endpoint: "/api/search/movie",
+                     parameters: ["query": query],
+                     decodingType: TrendingResponse.self)
     }
 }

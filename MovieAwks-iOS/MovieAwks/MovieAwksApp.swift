@@ -19,8 +19,18 @@ struct MovieAwksApp: App {
             if userRepository.accessToken == nil {
                 LoginView(userRepo: userRepository)
             } else {
-                HomeView(viewModel: HomeView.ViewModel())
-                    .environmentObject(userRepository)
+                TabView {
+                    HomeView(viewModel: HomeView.ViewModel())
+                        .environmentObject(userRepository)
+                        .tabItem {
+                            Label("Trending", systemImage: "chart.line.uptrend.xyaxis")
+                        }
+                    
+                    SearchView(viewModel: SearchView.ViewModel())
+                        .tabItem {
+                            Label("Search", systemImage: "magnifyingglass")
+                        }
+                }
             }
         }
     }

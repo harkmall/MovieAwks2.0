@@ -19,7 +19,6 @@ extension ProfileView {
         }
         
         private let userRepo: UserRepository
-        private var cancellables: Set<AnyCancellable> = []
         
         @Published var state: State = .loading
         @Published var name: String = ""
@@ -29,8 +28,7 @@ extension ProfileView {
             
             userRepo.$user
                 .compactMap { $0?.fullName }
-                .assign(to: \.name, on: self)
-                .store(in: &cancellables)
+                .assign(to: &$name)
         }
         
         func getUser() async {

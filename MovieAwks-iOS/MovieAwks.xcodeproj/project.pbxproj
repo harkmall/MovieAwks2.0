@@ -46,6 +46,9 @@
 		A7A72A4C2C3C707300673DD5 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A4B2C3C707300673DD5 /* Keychain.swift */; };
 		A7A72A4E2C3EF04D00673DD5 /* RatingEmojiRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A4D2C3EF04D00673DD5 /* RatingEmojiRepresentable.swift */; };
 		A7A72A502C401B2D00673DD5 /* RatingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A4F2C401B2D00673DD5 /* RatingItemView.swift */; };
+		A7A72A542C45717800673DD5 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A532C45717800673DD5 /* SearchView.swift */; };
+		A7A72A562C4599DE00673DD5 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A552C4599DE00673DD5 /* SearchViewModel.swift */; };
+		A7A72A582C46F64100673DD5 /* SearchItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A72A572C46F64100673DD5 /* SearchItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +110,10 @@
 		A7A72A4B2C3C707300673DD5 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		A7A72A4D2C3EF04D00673DD5 /* RatingEmojiRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingEmojiRepresentable.swift; sourceTree = "<group>"; };
 		A7A72A4F2C401B2D00673DD5 /* RatingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingItemView.swift; sourceTree = "<group>"; };
+		A7A72A512C4050EE00673DD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A7A72A532C45717800673DD5 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		A7A72A552C4599DE00673DD5 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		A7A72A572C46F64100673DD5 /* SearchItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,11 +166,13 @@
 		A73FA7F42C220726008262C3 /* MovieAwks */ = {
 			isa = PBXGroup;
 			children = (
+				A7A72A512C4050EE00673DD5 /* Info.plist */,
 				A73FA7F52C220726008262C3 /* MovieAwksApp.swift */,
 				A7A72A4B2C3C707300673DD5 /* Keychain.swift */,
 				A7A72A4D2C3EF04D00673DD5 /* RatingEmojiRepresentable.swift */,
 				A7737B562C29C944004944FC /* Networking */,
 				A7737B752C2B3EB9004944FC /* Home */,
+				A7A72A522C45716500673DD5 /* Search */,
 				A7A72A282C35A48D00673DD5 /* Detail */,
 				A7A72A3C2C38693600673DD5 /* Add Rating */,
 				A7A72A2B2C35C91F00673DD5 /* Profile */,
@@ -335,6 +344,16 @@
 			path = "Add Rating";
 			sourceTree = "<group>";
 		};
+		A7A72A522C45716500673DD5 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				A7A72A532C45717800673DD5 /* SearchView.swift */,
+				A7A72A552C4599DE00673DD5 /* SearchViewModel.swift */,
+				A7A72A572C46F64100673DD5 /* SearchItemView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -483,12 +502,15 @@
 				A7A72A2F2C35CFCA00673DD5 /* ProfileViewModel.swift in Sources */,
 				A7A72A392C38326C00673DD5 /* MovieRating.swift in Sources */,
 				A7737B582C29C9E7004944FC /* NetworkManager.swift in Sources */,
+				A7A72A542C45717800673DD5 /* SearchView.swift in Sources */,
 				A7737B6E2C2B0B9F004944FC /* AuthService.swift in Sources */,
 				A7A72A312C35D3BA00673DD5 /* DetailViewModel.swift in Sources */,
 				A7737B5F2C29CAA9004944FC /* User.swift in Sources */,
+				A7A72A562C4599DE00673DD5 /* SearchViewModel.swift in Sources */,
 				A7737B5B2C29CA92004944FC /* SIWAAuthRequestBody.swift in Sources */,
 				A7A72A422C3C3AEA00673DD5 /* MovieRatingRequestBody.swift in Sources */,
 				A73FA7F82C220726008262C3 /* LoginView.swift in Sources */,
+				A7A72A582C46F64100673DD5 /* SearchItemView.swift in Sources */,
 				A7737B742C2B3730004944FC /* LoginViewModel.swift in Sources */,
 				A7A72A342C38320F00673DD5 /* MovieRatingsService.swift in Sources */,
 				A7A72A372C38324700673DD5 /* MovieRatingsResponse.swift in Sources */,
@@ -669,6 +691,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MovieAwks/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -710,6 +733,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MovieAwks/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

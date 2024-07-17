@@ -26,16 +26,18 @@ struct TrendingItemView: View {
                 Text(trendingItem.title ?? "")
                     .font(.title3)
                     .bold()
-                AsyncImage(url: try? trendingItem.posterPath?.asURL()) { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                } placeholder: {
-                    ProgressView()
+                HStack(alignment: .bottom) {
+                    AsyncImage(url: try? trendingItem.posterPath?.asURL()) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .frame(height: 200)
+                    Text(trendingItem.emojiRating)
+                        .font(.largeTitle)
                 }
-                .frame(height: 200)
-                Text(trendingItem.emojiRating)
-                    .font(.largeTitle)
             }
 //            .offset(y: -200)
 //            .padding(.bottom, -200)
@@ -53,7 +55,7 @@ struct TrendingItemView: View {
                                                   originalLanguage: "en",
                                                   overview: "As the world fell, young Furiosa is snatched from the Green Place of Many Mothers and falls into the hands of a great Biker Horde led by the Warlord Dementus. Sweeping through the Wasteland they come across the Citadel presided over by The Immortan Joe. While the two Tyrants war for dominance, Furiosa must survive many trials as she puts together the means to find her way home.",
                                                   posterPath: "https://image.tmdb.org/t/p/w300/iADOJ8Zymht2JPMoy3R7xceZprc.jpg",
-                                                  mediaType: .movie,
+//                                                  mediaType: .movie,
                                                   genreIds: [],
                                                   popularity: 6058.314,
                                                   firstAirDate: nil,

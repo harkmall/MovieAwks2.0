@@ -13,6 +13,9 @@ struct DetailView: View {
     
     init(viewModel: ViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        Task {
+            await [viewModel.getMovieRatings(), viewModel.getMovieDetails()]
+        }
     }
     
     var body: some View {
@@ -26,11 +29,6 @@ struct DetailView: View {
                 }, label: {
                     Image(systemName: "plus.square")
                 })
-            }
-        }
-        .onAppear {
-            Task {
-                await [viewModel.getMovieRatings(), viewModel.getMovieDetails()]
             }
         }
         .sheet(isPresented: $showAddRating, onDismiss: {

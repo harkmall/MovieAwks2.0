@@ -13,7 +13,7 @@ protocol RatingEmojiRepresentable {
 
 extension RatingEmojiRepresentable {
     var emojiRating: String {
-        guard let rating = rating else { return "" }
+        guard let rating = rating else { return "No Ratings" }
         
         var emoji = "-"
         switch rating {

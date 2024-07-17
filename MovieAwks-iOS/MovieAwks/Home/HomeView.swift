@@ -13,6 +13,9 @@ struct HomeView: View {
     
     init(viewModel: ViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        Task {
+            await viewModel.getTrendingItems()
+        }
     }
     
     var body: some View {
@@ -27,11 +30,6 @@ struct HomeView: View {
                     }
                 }
         }
-        .onAppear(perform: {
-            Task {
-                await viewModel.getTrendingItems()
-            }
-        })
     }
     
     @ViewBuilder
@@ -69,9 +67,13 @@ struct HomeView: View {
                 TrendingItemView(trendingItem: trendingItem)
             }
         }
+        .refreshable {
+            await viewModel.getTrendingItems(reload: true)
+        }
     }
 }
 
 #Preview {
     HomeView(viewModel: HomeView.ViewModel())
+        .environmentObject(UserRepository())
 }

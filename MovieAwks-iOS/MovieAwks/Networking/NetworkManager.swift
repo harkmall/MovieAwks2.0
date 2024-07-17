@@ -66,7 +66,7 @@ extension NetworkingManager {
             case .development:
                 return "https://582c-2607-fea8-28a1-b700-5df0-246f-9739-68d3.ngrok-free.app"
             case .production:
-                return "" //fix this at some point
+                return "http://100.103.190.26:8080" //tailscale IP of my home server
             }
         }
     }

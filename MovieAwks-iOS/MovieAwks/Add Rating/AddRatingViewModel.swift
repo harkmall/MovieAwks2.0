@@ -19,7 +19,6 @@ extension AddRatingView {
         
         private let movieId: Int
         private let movieRatingsService: MovieRatingsServiceType
-        private var cancellables: Set<AnyCancellable> = []
         
         @Published private(set) var state: State = .idle
         @Published var comment: String = ""
@@ -34,8 +33,7 @@ extension AddRatingView {
             
             $rating
                 .map { $0.emojiRating }
-                .assign(to: \.formattedRating, on: self)
-                .store(in: &cancellables)
+                .assign(to: &$formattedRating)
         }
         
         func saveRating() async {

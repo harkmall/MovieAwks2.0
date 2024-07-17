@@ -13,26 +13,10 @@ struct TMDBController {
     
     private let tmbdAuthToken = Environment.get("TMDB_AUTH_TOKEN")
     
-    @Sendable
-    private func trending(req: Request) async throws -> TrendingResponse {
-        
-        let configuration = try await imagesConfiguration(req: req)
-        
-        guard let tmbdAuthToken = tmbdAuthToken else { throw Abort(.badRequest, reason: "TMDB Auth Token not found") }
-        guard let trendingType = req.parameters.get("type"),
-              let type = TrendingObject.MediaType(rawValue: trendingType) else { throw Abort(.notFound) }
-        
-        let timeFrame = req.query["time"] ?? "week"
-        let page = req.query["page"] ?? 1
-        
-        var trendingResponse = try await req.client
-            .get("https://api.themoviedb.org/3/trending/\(type.rawValue)/\(timeFrame)") {
-                try $0.query.encode(["language": "en-US", "page": "\(page)"])
-                $0.headers.bearerAuthorization = .init(token: tmbdAuthToken)
-            }
-            .content
-            .decode(TrendingResponse.self)
-        
+    private func augmentTrendingResponse(_ trendingResponse: TrendingResponse,
+                                         configuration: ImagesConfiguration,
+                                         req: Request) async throws -> TrendingResponse {
+        var trendingResponse = trendingResponse
         for index in trendingResponse.results.indices {
             let currentId = trendingResponse.results[index].id
             let averageRating = try await MovieRating.query(on: req.db)
@@ -43,6 +27,46 @@ struct TMDBController {
         }
         
         return trendingResponse
+    }
+    
+    @Sendable
+    private func trending(req: Request) async throws -> TrendingResponse {
+        
+        let configuration = try await imagesConfiguration(req: req)
+        
+        guard let tmbdAuthToken = tmbdAuthToken else { throw Abort(.badRequest, reason: "TMDB Auth Token not found") }
+        
+        let timeFrame = req.query["time"] ?? "week"
+        let page = req.query["page"] ?? 1
+        
+        let trendingResponse = try await req.client
+            .get("https://api.themoviedb.org/3/trending/movie/\(timeFrame)") {
+                try $0.query.encode(["language": "en-US", "page": "\(page)"])
+                $0.headers.bearerAuthorization = .init(token: tmbdAuthToken)
+            }
+            .content
+            .decode(TrendingResponse.self)
+        
+        return try await augmentTrendingResponse(trendingResponse, configuration: configuration, req: req)
+    }
+    
+    @Sendable
+    private func searchMovie(req: Request) async throws -> TrendingResponse {
+        guard let tmdbAuthToken = tmbdAuthToken else { throw Abort(.badRequest, reason: "TMDB Auth Token not found") }
+        guard let query: String = req.query["query"] else { throw Abort(.badRequest, reason: "Query string not present") }
+        
+        
+        let configuration = try await imagesConfiguration(req: req)
+        
+        let searchResponse = try await req.client
+            .get("https://api.themoviedb.org/3/search/movie") {
+                $0.headers.bearerAuthorization = .init(token: tmdbAuthToken)
+                try $0.query.encode(["query": query])
+            }
+            .content
+            .decode(TrendingResponse.self)
+        
+        return try await augmentTrendingResponse(searchResponse, configuration: configuration, req: req)
     }
     
     @Sendable
@@ -94,5 +118,6 @@ extension TMDBController: RouteCollection {
         routes.get("trending",":type", use: trending)
         routes.get("imagesConfiguration", use: imagesConfiguration)
         routes.get("movies", "details", ":id", use: movieDetail)
+        routes.get("search", "movie", use: searchMovie)
     }
 }

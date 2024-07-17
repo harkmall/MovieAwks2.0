@@ -35,6 +35,7 @@ extension UserRepository {
     }
     
     func logoutUser() {
+        keychain.delete(MovieAwksApp.accessTokenKey)
         self.accessToken = nil
     }
 }

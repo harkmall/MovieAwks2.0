@@ -20,7 +20,7 @@ struct TrendingObject: Codable {
     let originalLanguage: String?
     let overview: String?
     let posterPath: String?
-    let mediaType: MediaType
+//    let mediaType: MediaType
     let genreIds: [Int]
     let popularity: Float
     let firstAirDate: Date? //YYYY-MM-DD
