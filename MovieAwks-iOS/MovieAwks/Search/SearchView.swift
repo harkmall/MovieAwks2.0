@@ -70,5 +70,5 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView(viewModel: SearchView.ViewModel())
+    SearchView(viewModel: SearchView.ViewModel(tmdbService: Mock_TMBDService(networkingManager: .current)))
 }

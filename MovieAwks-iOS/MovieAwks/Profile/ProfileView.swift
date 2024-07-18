@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ProfileView: View {
-    
     @StateObject var viewModel: ViewModel
     
     init(viewModel: ViewModel) {

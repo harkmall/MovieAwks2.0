@@ -74,6 +74,6 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(viewModel: HomeView.ViewModel())
+    HomeView(viewModel: HomeView.ViewModel(tmdbService: Mock_TMBDService(networkingManager: .current)))
         .environmentObject(UserRepository())
 }
