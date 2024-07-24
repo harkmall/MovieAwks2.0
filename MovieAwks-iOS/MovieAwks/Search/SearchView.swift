@@ -42,7 +42,8 @@ struct SearchView: View {
     }
     
     private var idleView: some View {
-        Text("Search")
+        HStack {}
+//        Text("Search for movie")
     }
     
     private var loadingView: some View {
@@ -70,5 +71,5 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView(viewModel: SearchView.ViewModel(tmdbService: Mock_TMBDService(networkingManager: .current)))
+    SearchView(viewModel: SearchView.ViewModel(tmdbService: Mock_TMDBService(networkingManager: .current)))
 }

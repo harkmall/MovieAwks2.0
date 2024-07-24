@@ -62,9 +62,16 @@ struct HomeView: View {
     }
     
     private func successView(trendingItems: [TrendingObject]) -> some View {
-        List(trendingItems, id: \.id) { trendingItem in
-            NavigationLink(destination: DetailView(viewModel: DetailView.ViewModel(itemId: trendingItem.id))) {
-                TrendingItemView(trendingItem: trendingItem)
+        let columns = Array(repeating: GridItem(), count: 2)
+        
+        return ScrollView {
+            LazyVGrid(columns: columns) {
+                ForEach(trendingItems, id: \.id) { trendingItem in
+                    NavigationLink(destination: DetailView(viewModel: DetailView.ViewModel(itemId: trendingItem.id))) {
+                        TrendingItemView(trendingItem: trendingItem)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
             }
         }
         .refreshable {
@@ -74,6 +81,6 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(viewModel: HomeView.ViewModel(tmdbService: Mock_TMBDService(networkingManager: .current)))
+    HomeView(viewModel: HomeView.ViewModel(tmdbService: Mock_TMDBService(networkingManager: .current)))
         .environmentObject(UserRepository())
 }

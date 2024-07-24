@@ -19,13 +19,6 @@ struct AddRatingView: View {
         NavigationStack {
             content
             .navigationTitle("Add Rating")
-            .toolbar {
-                Button(action: {
-                    dismiss()
-                }, label: {
-                    Text("Done")
-                })
-            }
             .onReceive(viewModel.$commentSaved, perform: { commentSaved in
                 if commentSaved {
                     dismiss()
@@ -52,14 +45,20 @@ struct AddRatingView: View {
     
     private var idleView: some View {
         VStack {
+            Spacer()
+            
             Text(viewModel.formattedRating)
-            Slider(value: $viewModel.rating, in: 0...10, step: 1)
+                .font(.largeTitle)
+            
+            Slider(value: $viewModel.rating, in: 0...10, step: 0.5)
+            
             TextField("Comment", text: $viewModel.comment, axis: .vertical)
                 .lineLimit(5)
+            
+            Spacer()
+            
             Button(action: {
-                Task {
-                    await viewModel.saveRating()
-                }
+                Task { await viewModel.saveRating() }
             }, label: {
                 Text("Save")
             })

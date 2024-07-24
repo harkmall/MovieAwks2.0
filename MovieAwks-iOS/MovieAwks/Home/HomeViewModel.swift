@@ -29,9 +29,7 @@ extension HomeView {
         }
         
         func getTrendingItems(reload: Bool = false) async {
-            if !reload {
-                self.state = .loading
-            }
+            if !reload { self.state = .loading }
             do {
                 let trendingResponse = try await self.tmdbService
                     .getTrending(type: .movie,

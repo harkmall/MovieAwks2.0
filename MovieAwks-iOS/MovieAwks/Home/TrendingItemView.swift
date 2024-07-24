@@ -11,30 +11,31 @@ struct TrendingItemView: View {
     let trendingItem: TrendingObject
     
     var body: some View {
-        VStack {
-            HStack(alignment: .center) {
-                VStack(alignment: .center) {
-                    AsyncImage(url: try? trendingItem.posterPath?.asURL()) { image in
-                        image
-                            .resizable()
-                            .scaledToFit()
-                    } placeholder: {
-                        ProgressView()
-                            .frame(width: 100)
-                            .padding()
-                    }
-                    .frame(height: 200)
-                    
-                    Text(trendingItem.emojiRating)
-                        .padding(8)
-                        .background(RoundedRectangle(cornerRadius: 5).fill(Color.gray))
-                }
-                
-                Text(trendingItem.title ?? "")
-                    .font(.title3)
+        VStack(alignment: .center) {
+            AsyncImage(url: try? trendingItem.posterPath?.asURL()) { image in
+                image
+                    .resizable()
+                    .scaledToFit()
+            } placeholder: {
+                ProgressView()
+                    .frame(width: 100)
+                    .padding()
+            }
+            .frame(height: 200)
+            
+            if let title = trendingItem.title {
+                Text(title)
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(.primary)
+                    .font(.caption)
                     .bold()
                 Spacer()
             }
+            
+            Text(trendingItem.emojiRating)
+                .foregroundStyle(.secondary)
+                .padding(8)
+                .background(RoundedRectangle(cornerRadius: 5).fill(Color.secondary.opacity(0.2)))
         }
     }
 }

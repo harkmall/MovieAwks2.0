@@ -31,3 +31,41 @@ struct MovieRatingsService: MovieRatingsServiceType {
                      decodingType: Empty.self)
     }
 }
+
+struct Mock_MovieRatingsService: MovieRatingsServiceType {
+    var networkingManager: NetworkingManager
+    
+    func getRatings(forMovie id: Int) async throws -> MovieRatingsResponse {
+        return MovieRatingsResponse(ratings: [MovieRating(id: .init(),
+                                                          user: User(id: .init(),
+                                                                     email: "email@email.com",
+                                                                     firstName: "Mark",
+                                                                     lastName: "Hall"),
+                                                          createdAt: Date(),
+                                                          movieId: 1234,
+                                                          rating: 6.9,
+                                                          comment: "Some comment"),
+                                              MovieRating(id: .init(),
+                                                          user: User(id: .init(),
+                                                                     email: "email@email.com",
+                                                                     firstName: "Mark",
+                                                                     lastName: "Hall"),
+                                                          createdAt: Date(),
+                                                          movieId: 1234,
+                                                          rating: 6.9,
+                                                          comment: "Some comment 2"),
+                                              MovieRating(id: .init(),
+                                                          user: User(id: .init(),
+                                                                     email: "email@email.com",
+                                                                     firstName: "Mark",
+                                                                     lastName: "Hall"),
+                                                          createdAt: Date(),
+                                                          movieId: 1234,
+                                                          rating: 6.9,
+                                                          comment: "Some comment 3")],
+                                    totalRatings: 3,
+                                    averageRating: 6.9)
+    }
+    
+    func saveMovieRating(with body: MovieRatingRequestBody) async throws { }
+}

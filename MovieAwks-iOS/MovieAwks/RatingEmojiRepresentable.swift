@@ -33,7 +33,7 @@ extension RatingEmojiRepresentable {
             emoji = "-"
         }
         
-        return "\(emoji) \(rating.formatted(.number.precision(.integerAndFractionLength(integer: 1, fraction: 1))))"
+        return "\(emoji) \(rating.formatted(.number.precision(.integerAndFractionLength(integerLimits: 1...2, fractionLimits: 1...1))))"
     }
 }
 
