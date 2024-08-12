@@ -18,8 +18,8 @@ extension SearchView {
         }
         
         @Published private(set) var state: State = .idle
-        @Published var searchText = ""
         @Published private(set) var debouncedSearchText = ""
+        @Published var searchText = ""
         
         private let tmdbService: TMDBServiceType
         

@@ -14,9 +14,6 @@ struct DetailView: View {
     
     init(viewModel: ViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        Task {
-            await [viewModel.getMovieRatings(), viewModel.getMovieDetails()]
-        }
     }
     
     var body: some View {
@@ -41,6 +38,9 @@ struct DetailView: View {
                 .presentationDetents([.medium])
                 .presentationDragIndicator(.visible)
         })
+        .task {
+            _ = await [viewModel.getMovieRatings(), viewModel.getMovieDetails()]
+        }
     }
     
     @ViewBuilder

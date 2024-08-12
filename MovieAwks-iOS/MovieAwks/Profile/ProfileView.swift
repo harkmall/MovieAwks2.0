@@ -19,10 +19,8 @@ struct ProfileView: View {
             content
                 .navigationTitle("Profile")
         }
-        .onAppear {
-            Task {
-                await viewModel.getUser()
-            }
+        .task {
+            await viewModel.getUser()
         }
         
     }
@@ -46,12 +44,16 @@ struct ProfileView: View {
     private var successView: some View {
         VStack {
             Text(viewModel.name)
-            Button(action: {
-                viewModel.logoutUser()
-            }, label: {
-                Text("Logout")
-            })
+            logoutButton
         }
+    }
+    
+    private var logoutButton: some View {
+        Button(action: {
+            viewModel.logoutUser()
+        }, label: {
+            Text("Logout")
+        })
     }
     
     private func errorView(error: Error) -> some View {
@@ -64,6 +66,7 @@ struct ProfileView: View {
             }, label: {
                 Text("Retry")
             })
+            logoutButton
         }
     }
 }

@@ -13,9 +13,6 @@ struct HomeView: View {
     
     init(viewModel: ViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        Task {
-            await viewModel.getTrendingItems()
-        }
     }
     
     var body: some View {
@@ -29,6 +26,11 @@ struct HomeView: View {
                         }
                     }
                 }
+        }
+        .task {
+            Task {
+                await viewModel.getTrendingItems()
+            }
         }
     }
     
